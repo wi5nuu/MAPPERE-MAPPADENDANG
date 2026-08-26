@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://labongnge.aksesdesa.id/sitemap-index.xml
+
+# Block irrelevant paths
+Disallow: /node_modules/
+Disallow: /.astro/
