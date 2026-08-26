@@ -1,0 +1,19 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force LF for web files
+*.astro text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.ts text eol=lf
+*.html text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+
+# Binary files
+*.jpg binary
+*.png binary
+*.webp binary
+*.mp3 binary
+*.woff2 binary
