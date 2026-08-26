@@ -95,10 +95,41 @@ button { font-family: inherit; }
   margin-inline: auto;
 }
 
-/* ---- Section Defaults ---- */
-.section        { padding: var(--section-pad) 0; }
-.bg-dark        { background: var(--dark); }
-.bg-charcoal    { background: var(--charcoal); }
+/* ---- Section Defaults & Strict Color Contrast ---- */
+.section { padding: var(--section-pad) 0; }
+
+/* Light Sections (Tentang, Mappadendang, Olahraga) */
+.section:not(.bg-dark):not(.bg-charcoal) {
+  background-color: var(--cream);
+  color: var(--ink);
+}
+.section:not(.bg-dark):not(.bg-charcoal) .section-h2 {
+  color: var(--ink);
+}
+.section:not(.bg-dark):not(.bg-charcoal) .section-h2 em {
+  color: var(--gold-dk);
+}
+.section:not(.bg-dark):not(.bg-charcoal) .section-sub {
+  color: var(--muted);
+}
+.section:not(.bg-dark):not(.bg-charcoal) p {
+  color: var(--ink-3);
+}
+.section:not(.bg-dark):not(.bg-charcoal) h3 {
+  color: var(--ink);
+}
+.section:not(.bg-dark):not(.bg-charcoal) strong {
+  color: var(--ink);
+}
+
+/* Dark Sections (Rundown, Mappere, Tapparareng) */
+.bg-dark     { background-color: var(--dark); color: #fff; }
+.bg-charcoal { background-color: var(--charcoal); color: #fff; }
+.bg-dark .section-h2, .bg-charcoal .section-h2 { color: #fff; }
+.bg-dark .section-h2 em, .bg-charcoal .section-h2 em { color: var(--gold-lt); }
+.bg-dark .section-sub, .bg-charcoal .section-sub { color: rgba(255,255,255,0.6); }
+.bg-dark p, .bg-charcoal p { color: rgba(255,255,255,0.68); }
+.bg-dark strong, .bg-charcoal strong { color: #fff; }
 
 /* Intro block (eyebrow + h2 + sub centred) */
 .sec-intro {

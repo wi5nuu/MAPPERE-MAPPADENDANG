@@ -9,7 +9,7 @@
   </svg>
 </div>
 <div id="music-player" class="mp" aria-label="Pemutar musik latar" role="region">
-  <audio id="bgAudio" loop preload="none">
+  <audio id="bgAudio" loop preload="auto" playsinline webkit-playsinline>
     <source src="/audio/bugis_tana_ogi_wanuakku.mp3" type="audio/mpeg" />
   </audio>
 
@@ -38,7 +38,7 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
     </svg>
-    <input id="volSlider" type="range" min="0" max="1" step="0.05" value="0.45" aria-label="Volume" />
+    <input id="volSlider" type="range" min="0" max="1" step="0.05" value="0.55" aria-label="Volume" />
   </div>
 </div>
 
@@ -49,7 +49,7 @@
   const volSlider = document.getElementById('volSlider') as HTMLInputElement;
   const hint      = document.getElementById('mpHint')!;
 
-  audio.volume = 0.45;
+  audio.volume = 0.55;
   let started = false;
 
   function setPlaying(playing: boolean) {
@@ -58,33 +58,49 @@
   }
 
   function hideHint() {
-    hint.classList.add('hint-gone');
+    if (hint) hint.classList.add('hint-gone');
   }
 
   function startMusic() {
     if (started) return;
-    audio.play()
-      .then(() => {
-        started = true;
-        setPlaying(true);
-        hideHint();
-      })
-      .catch(() => {
-        /* Blocked — keep hint visible */
-      });
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          started = true;
+          setPlaying(true);
+          hideHint();
+        })
+        .catch(() => {
+          /* Autoplay was restricted by browser policy; waiting for interaction */
+        });
+    }
   }
 
-  /* Try immediately (some browsers allow it) */
+  // 1. Try playing immediately on load
+  if (document.readyState === 'complete') {
+    startMusic();
+  } else {
+    window.addEventListener('load', startMusic, { once: true });
+  }
   startMusic();
 
-  /* Fallback: first user interaction */
-  const events = ['click','scroll','keydown','touchstart','pointerdown','mousemove'];
-  events.forEach(ev =>
-    document.addEventListener(ev, function handler() {
-      startMusic();
-      if (started) events.forEach(e => document.removeEventListener(e, handler));
-    }, { passive: true })
-  );
+  // 2. High-priority mobile touch & click listeners
+  const interactionEvents = ['touchstart', 'touchend', 'pointerdown', 'click', 'scroll', 'keydown'];
+  const handleUserInteraction = () => {
+    startMusic();
+    if (started) {
+      interactionEvents.forEach(e => {
+        window.removeEventListener(e, handleUserInteraction);
+        document.removeEventListener(e, handleUserInteraction);
+      });
+    }
+  };
+
+  interactionEvents.forEach(ev => {
+    window.addEventListener(ev, handleUserInteraction, { passive: true, capture: true });
+    document.addEventListener(ev, handleUserInteraction, { passive: true, capture: true });
+  });
 
   /* Toggle play/pause via button */
   btn.addEventListener('click', (e) => {
