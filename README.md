@@ -13,11 +13,11 @@
 
 ## ✨ Tentang Proyek Ini
 
-Proyek ini lahir dari keinginan sederhana: **agar tradisi yang diwariskan leluhur tidak hilang ditelan zaman**.
+Proyek ini lahir dari tekad yang teguh: **menjunjung tinggi adat leluhur agar terus dilestarikan dan tidak akan pernah musnah**, sehingga wilayah Calodo selalu dikenal dan dikenang bukan hanya sebagai desa biasa, melainkan sebagai tempat di mana tradisi sakral senantiasa dihidupkan.
 
-Website ini didedikasikan untuk mendokumentasikan **Pesta Panen Calodo** — sebuah tradisi tahunan yang dirayakan oleh masyarakat Calodo di Kecamatan Cenrana, Kabupaten Bone, Sulawesi Selatan. Setiap tahun, setelah musim panen padi dan kebun, warga Calodo berkumpul untuk merayakan syukur dalam rangkaian kegiatan adat yang kaya makna, penuh semangat, dan mempererat tali persaudaraan.
+Tradisi ini dilaksanakan sebagai **wujud rasa syukur yang mendalam kepada Allah SWT** atas limpahan rezeki hasil padi dan kebun yang telah diberikan. Perayaan ini selalu disambut dengan antusiasme yang luar biasa dari masyarakat setempat, serta dihadiri oleh pengunjung dari berbagai penjuru daerah yang datang berbondong-bondong untuk ikut serta meramaikan dan merasakan kehangatan persaudaraan Bugis.
 
-Dibuat dengan penuh rasa cinta terhadap tanah leluhur. Terbuka untuk umum *(open source)* agar siapa pun bisa ikut menjaga dan melestarikannya.
+Dibuat dengan penuh rasa cinta dan dedikasi. Terbuka untuk umum *(open source)* agar seluruh dunia dapat menyaksikan kemegahan budaya ini.
 
 ---
 
