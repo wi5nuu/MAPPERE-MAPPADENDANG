@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Halaman Tidak Ditemukan — Pesta Panen Mappere & Mappadendang Calodo"
+  description="Halaman yang kamu cari tidak tersedia. Kembali ke halaman utama Pesta Panen Calodo Cenrana."
+>
+  <main class="not-found">
+    <div class="nf-inner">
+      <p class="nf-code">404</p>
+      <h1 class="nf-title">Halaman Tidak Ditemukan</h1>
+      <p class="nf-desc">
+        Maaf, halaman yang kamu cari tidak ada atau telah dipindahkan.
+      </p>
+      <a href="/" class="nf-btn">← Kembali ke Beranda</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+.not-found {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #100E0B;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+.nf-inner { max-width: 480px; }
+.nf-code {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(6rem, 18vw, 10rem);
+  font-weight: 700;
+  color: rgba(201,151,74,0.18);
+  line-height: 1;
+  margin-bottom: 0;
+}
+.nf-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.nf-desc {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.nf-btn {
+  display: inline-block;
+  background: #C9974A;
+  color: #100E0B;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 2px;
+  transition: background 0.3s, transform 0.2s;
+}
+.nf-btn:hover { background: #E2B96F; transform: translateY(-2px); }
+</style>
