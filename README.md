@@ -189,6 +189,12 @@ Website ini dapat diakses di:
 
 ---
 
+## 👨‍💻 Pengembang / Creator
+
+Website ini dibuat, dirancang, dan didedikasikan oleh **Wisnu Alfian Nur Ashar** ([@wi5nuu](https://github.com/wi5nuu)) untuk mendokumentasikan dan melestarikan warisan budaya leluhur masyarakat Calodo, Cenrana, Bone, Sulawesi Selatan secara terbuka *(open source)* bagi generasi mendatang.
+
+---
+
 ## 🤝 Kontribusi
 
 Proyek ini **open source** dan terbuka untuk semua orang. Jika kamu warga Calodo, peneliti budaya, atau siapa pun yang ingin berkontribusi — baik berupa koreksi informasi, foto asli, atau perbaikan teknis — silakan:
