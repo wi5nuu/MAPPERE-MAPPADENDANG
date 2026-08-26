@@ -39,10 +39,10 @@ const navLinks = [
       <div class="footer-info">
         <p class="footer-nav-title">Informasi</p>
         <ul class="info-list">
-          <li>📍 Calodo, Kec. Cenrana</li>
-          <li>🗺 Kab. Bone, Sulawesi Selatan</li>
-          <li>📅 Setiap Tahun (Pasca Panen)</li>
-          <li>⏰ 09.00 — Malam Hari</li>
+          <li><span class="info-tag">Lokasi</span> Calodo, Kec. Cenrana</li>
+          <li><span class="info-tag">Wilayah</span> Kab. Bone, Sulawesi Selatan</li>
+          <li><span class="info-tag">Pelaksanaan</span> Setiap Tahun (Pasca Panen)</li>
+          <li><span class="info-tag">Waktu</span> 09.00 — Malam Hari WITA</li>
         </ul>
       </div>
     </div>
@@ -136,8 +136,21 @@ const navLinks = [
 
 .info-list li {
   font-size: 0.83rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.45);
   line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.info-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.8;
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 80px;
 }
 
 .footer-bar {
