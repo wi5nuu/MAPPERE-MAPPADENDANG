@@ -39,38 +39,63 @@ const keywords = [
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Festival',
-  name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
-  description: description,
-  url: siteUrl,
-  location: {
-    '@type': 'Place',
-    name: 'Calodo, Cenrana, Bone, Sulawesi Selatan',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Cenrana',
-      addressRegion: 'Bone',
-      addressCountry: 'ID',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
+      description: description,
+      inLanguage: 'id-ID',
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '-4.4',
-      longitude: '120.3',
+    {
+      '@type': 'Festival',
+      '@id': `${siteUrl}/#festival`,
+      name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
+      description: description,
+      url: siteUrl,
+      location: {
+        '@type': 'Place',
+        name: 'Calodo, Cenrana, Bone, Sulawesi Selatan',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Cenrana',
+          addressRegion: 'Bone',
+          addressCountry: 'ID',
+        },
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: '-4.4',
+          longitude: '120.3',
+        },
+      },
+      organizer: {
+        '@type': 'Organization',
+        name: 'Masyarakat Calodo Cenrana',
+      },
+      eventSchedule: {
+        '@type': 'Schedule',
+        repeatFrequency: 'P1Y',
+        startTime: '09:00',
+        endTime: '21:00',
+      },
+      image: image,
+      inLanguage: 'id',
+      isAccessibleForFree: true,
     },
-  },
-  organizer: {
-    '@type': 'Organization',
-    name: 'Masyarakat Calodo Cenrana',
-  },
-  eventSchedule: {
-    '@type': 'Schedule',
-    repeatFrequency: 'P1Y',
-    startTime: '09:00',
-    endTime: '21:00',
-  },
-  image: image,
-  inLanguage: 'id',
-  isAccessibleForFree: true,
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}/#breadcrumb`,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Beranda',
+          item: siteUrl,
+        }
+      ],
+    }
+  ]
 };
 ---
 
