@@ -1,41 +1,103 @@
 ---
+const year = new Date().getFullYear();
+const navLinks = [
+  { href: '#tentang',      label: 'Tentang' },
+  { href: '#tapparareng',  label: 'Tapparareng' },
+  { href: '#rundown',      label: 'Rundown' },
+  { href: '#mappadendang', label: 'Mappadendang' },
+  { href: '#mappere',      label: "Mappere'" },
+  { href: '#olahraga',     label: 'Olahraga' },
+];
 ---
 
-<footer id="footer">
+<footer id="footer" aria-label="Footer">
   <div class="container">
-    <div class="footer-body">
-      <p class="footer-loc">Calodo · Cenrana · Bone · Sulawesi Selatan</p>
-      <h2 class="footer-title">
-        Pesta Panen<br /><em>Calodo Cenrana</em>
-      </h2>
-      <p class="footer-tagline">
-        Merayakan syukur, melestarikan warisan leluhur, mempererat tali persaudaraan.
-      </p>
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <p class="footer-loc">Calodo · Cenrana · Bone · Sulsel</p>
+        <h2 class="footer-title">
+          Pesta Panen<br /><em>Mappere &amp; Mappadendang</em>
+        </h2>
+        <p class="footer-tagline">
+          Merayakan syukur, melestarikan warisan leluhur,
+          mempererat tali persaudaraan masyarakat Bugis Calodo Cenrana.
+        </p>
+      </div>
+
+      <!-- Nav -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <p class="footer-nav-title">Navigasi</p>
+        <ul>
+          {navLinks.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Info -->
+      <div class="footer-info">
+        <p class="footer-nav-title">Informasi</p>
+        <ul class="info-list">
+          <li>📍 Calodo, Kec. Cenrana</li>
+          <li>🗺 Kab. Bone, Sulawesi Selatan</li>
+          <li>📅 Setiap Tahun (Pasca Panen)</li>
+          <li>⏰ 09.00 — Malam Hari</li>
+        </ul>
+      </div>
     </div>
+
     <div class="footer-bar">
-      <span>Tradisi Bugis · Sulawesi Selatan</span>
+      <span>© {year} Pesta Panen Calodo Cenrana. Open Source — MIT License.</span>
       <span class="sep">·</span>
-      <span>Warisan Budaya Lokal Calodo Cenrana</span>
+      <a href="https://github.com/wi5nuu/MAPPERE-MAPPADENDANG" target="_blank" rel="noopener noreferrer" class="footer-gh">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        GitHub
+      </a>
     </div>
   </div>
 </footer>
 
+<!-- Back to top -->
+<button id="btt" class="btt" aria-label="Kembali ke atas" title="Kembali ke atas">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+<script>
+  const btt = document.getElementById('btt')!;
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('btt-visible', window.scrollY > 600);
+  }, { passive: true });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+
 <style>
 #footer {
   background: #100E0B;
-  padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+  padding: clamp(4rem, 8vw, 7rem) 0 0;
 }
-.footer-body { margin-bottom: 3rem; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
 .footer-loc {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.2);
   margin-bottom: 1rem;
 }
 .footer-title {
   font-family: var(--ff-serif);
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: 700;
   color: rgba(255,255,255,0.82);
   line-height: 1.05;
@@ -43,19 +105,86 @@
 }
 .footer-title em { color: var(--gold); font-style: italic; }
 .footer-tagline {
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.3);
-  max-width: 440px;
-  line-height: 1.7;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.28);
+  line-height: 1.75;
+  max-width: 380px;
 }
+
+.footer-nav-title {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 1.2rem;
+}
+.footer-nav ul, .info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.footer-nav a {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.25s;
+}
+.footer-nav a:hover { color: var(--gold); }
+
+.info-list li {
+  font-size: 0.83rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+
 .footer-bar {
-  border-top: 1px solid rgba(255,255,255,0.07);
-  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 0;
   display: flex;
   gap: 0.8rem;
   align-items: center;
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   color: rgba(255,255,255,0.18);
+  flex-wrap: wrap;
 }
-.sep { color: rgba(255,255,255,0.1); }
+.sep { color: rgba(255,255,255,0.08); }
+.footer-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.25s;
+  margin-left: auto;
+}
+.footer-gh:hover { color: var(--gold); }
+
+/* Back to top */
+.btt {
+  position: fixed;
+  bottom: 6rem;
+  right: 1.5rem;
+  z-index: 900;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(16,14,11,0.85);
+  backdrop-filter: blur(12px);
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s, background 0.3s;
+  pointer-events: none;
+}
+.btt-visible { opacity: 1; transform: none; pointer-events: auto; }
+.btt:hover { background: rgba(201,151,74,0.15); color: var(--gold); border-color: rgba(201,151,74,0.3); }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .btt { bottom: 7rem; }
+}
 </style>
