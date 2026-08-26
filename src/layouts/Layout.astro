@@ -4,38 +4,138 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  url?: string;
 }
 
+const siteUrl = 'https://labongnge.aksesdesa.id';
+
 const {
-  title = 'Pesta Panen Calodo Cenrana — Tradisi Syukur Masyarakat Bugis',
-  description = 'Pesta Panen tahunan Calodo Cenrana menampilkan Mappadendang, Mappere ayunan raksasa, dan final olahraga — perayaan syukur atas hasil padi dan kebun masyarakat Bugis Bone.',
+  title = 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana — Tradisi Bugis Bone Sulawesi Selatan',
+  description = 'Pesta Panen Mappere dan Mappadendang di Calodo, Kecamatan Cenrana, Kabupaten Bone, Sulawesi Selatan. Tradisi syukur tahunan masyarakat Bugis — ayunan raksasa Mappere, penumbukan gabah Mappadendang, Tapparareng, dan olahraga tradisional.',
+  image = `${siteUrl}/img/mappadendang.jpg`,
+  url = siteUrl,
 } = Astro.props;
+
+const keywords = [
+  'Pesta Panen Calodo',
+  'Mappere Calodo',
+  'Mappadendang Calodo',
+  'Pesta Panen Cenrana',
+  'tradisi Bugis Bone',
+  'Calodo Cenrana',
+  'Mappere Bugis',
+  'Mappadendang Bugis',
+  'Tapparareng Calodo',
+  'festival budaya Bone',
+  'budaya Sulawesi Selatan',
+  'adat Bugis Bone',
+  'pesta panen Sulsel',
+  'Cenrana Bone',
+  'tradisi Bone Sulawesi Selatan',
+  'ayunan raksasa Bugis',
+  'lesung Bugis',
+].join(', ');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Festival',
+  name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
+  description: description,
+  url: siteUrl,
+  location: {
+    '@type': 'Place',
+    name: 'Calodo, Cenrana, Bone, Sulawesi Selatan',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Cenrana',
+      addressRegion: 'Bone',
+      addressCountry: 'ID',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: '-4.4',
+      longitude: '120.3',
+    },
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: 'Masyarakat Calodo Cenrana',
+  },
+  eventSchedule: {
+    '@type': 'Schedule',
+    repeatFrequency: 'P1Y',
+    startTime: '09:00',
+    endTime: '21:00',
+  },
+  image: image,
+  inLanguage: 'id',
+  isAccessibleForFree: true,
+};
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="id" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- ═══ Primary SEO ═══ -->
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Masyarakat Calodo Cenrana" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={url} />
+
+    <!-- ═══ Open Graph / Facebook ═══ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Pesta Panen Mappere dan Mappadendang Calodo Cenrana" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="Pesta Panen Calodo Cenrana" />
+
+    <!-- ═══ Twitter Card ═══ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- ═══ Geo tags (lokal Bone/Cenrana) ═══ -->
+    <meta name="geo.region" content="ID-SN" />
+    <meta name="geo.placename" content="Calodo, Cenrana, Bone, Sulawesi Selatan" />
+    <meta name="geo.position" content="-4.4;120.3" />
+    <meta name="ICBM" content="-4.4, 120.3" />
+
+    <!-- ═══ Technical ═══ -->
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#100E0B" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- ═══ Fonts — preconnect first, then load ═══ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <title>{title}</title>
+
+    <!-- ═══ Preload hero image for LCP ═══ -->
+    <link rel="preload" as="image" href="/img/mappadendang.jpg" />
+
+    <!-- ═══ JSON-LD Structured Data ═══ -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <slot />
 
     <script>
-      /* Global reveal observer for .reveal elements */
+      /* Global reveal observer */
       const revealEls = document.querySelectorAll('.reveal');
       const revealIO  = new IntersectionObserver((entries) => {
         entries.forEach((e) => {
