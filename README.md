@@ -142,23 +142,37 @@ public/
 
 ---
 
-## 🚀 Cara Menjalankan
+## 🚀 Cara Menjalankan & Hosting
 
+### 1. Pengembangan Lokal
 ```bash
 # Clone repositori
-git clone https://github.com/[username]/LABONGNGE.git
-cd LABONGNGE
+git clone https://github.com/wi5nuu/MAPPERE-MAPPADENDANG.git
+cd MAPPERE-MAPPADENDANG
 
 # Install dependencies
 npm install
 
-# Jalankan di lokal
+# Jalankan server dev lokal
 npm run dev
-# → http://localhost:4321
+# Akses di: http://localhost:4321
 
-# Build untuk produksi
+# Build produksi
 npm run build
+# Hasil build statis ada di folder `dist/`
 ```
+
+### 2. Panduan Hosting Siap Pakai
+
+Website ini merupakan **Static Site Generator (SSG)** yang sangat ringan, super cepat, dan hemat resource. Dapat di-hosting di mana saja:
+
+| Platform | Build Command | Output Directory | Keunggulan |
+|---|---|---|---|
+| **Vercel** | `npm run build` | `dist` | Otomatis deploy via GitHub, Global CDN, SSL gratis |
+| **Netlify** | `npm run build` | `dist` | Zero-config, Forms, Instant cache invalidation |
+| **Cloudflare Pages** | `npm run build` | `dist` | Unlimited bandwidth, response time < 50ms |
+| **GitHub Pages** | Astro GitHub Action | `dist` | Gratis langsung dari repository ini |
+| **cPanel / Apache** | Upload isi folder `dist/` | `public_html` | Sudah dilengkapi file `.htaccess` bawaan |
 
 ---
 
