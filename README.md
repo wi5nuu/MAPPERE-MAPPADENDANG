@@ -2,6 +2,11 @@
 
 > **Website resmi dokumentasi tradisi Pesta Panen Mappere dan Mappadendang di Calodo, Kecamatan Cenrana, Kabupaten Bone, Sulawesi Selatan.**
 
+![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg)
+![Astro](https://img.shields.io/badge/Astro-v5-BC52EE.svg?logo=astro)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Region](https://img.shields.io/badge/Region-Bone%20Sulawesi%20Selatan-blue)
+
 ![Mappadendang Calodo](public/img/mappadendang.jpg)
 
 ---
@@ -205,3 +210,4 @@ Kepada para tetua, pemain Mappadendang, peserta Mappere', dan semua warga yang h
 ⭐ Jika proyek ini bermanfaat, berikan bintang di GitHub!
 
 </div>
+
