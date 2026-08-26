@@ -1,6 +1,6 @@
 /* ================================================
-   PESTA PANEN CALODO CENRANA — global.css
-   Professional editorial design system
+   PESTA PANEN MAPPERE & MAPPADENDANG CALODO CENRANA
+   Professional editorial design system — global.css
    ================================================ */
 
 /* ---- Design Tokens ---- */
@@ -19,12 +19,15 @@
   --charcoal:   #18160F;
 
   --ff-serif:   'Cormorant Garamond', Georgia, serif;
-  --ff-sans:    'Inter', system-ui, sans-serif;
-  --ff-body:    'DM Sans', var(--ff-sans);
+  --ff-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --ff-body:    var(--ff-sans);
 
   --container:  1180px;
   --ease:       cubic-bezier(0.4, 0, 0.2, 1);
   --t:          0.35s;
+
+  /* Consistent section spacing */
+  --section-pad: clamp(72px, 12vw, 130px);
 }
 
 /* ---- Reset ---- */
@@ -36,18 +39,51 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
   font-size: 16px;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 body {
-  font-family: var(--ff-sans);
+  font-family: var(--ff-body);
   background: var(--cream);
   color: var(--ink);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
-img { display: block; max-width: 100%; height: auto; }
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  font-style: italic; /* alt text styling */
+}
 a   { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
 
+/* ---- Focus (accessibility) ---- */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---- Skip link (accessibility) ---- */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--gold);
+  color: var(--dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 4px 4px;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ---- Selection ---- */
 ::selection {
   background: var(--gold);
   color: var(--dark);
@@ -60,14 +96,22 @@ a   { color: inherit; text-decoration: none; }
 }
 
 /* ---- Section Defaults ---- */
-.section { padding: clamp(72px, 12vw, 130px) 0; }
-.bg-dark     { background: var(--dark); }
-.bg-charcoal { background: var(--charcoal); }
+.section        { padding: var(--section-pad) 0; }
+.bg-dark        { background: var(--dark); }
+.bg-charcoal    { background: var(--charcoal); }
+
+/* Intro block (eyebrow + h2 + sub centred) */
+.sec-intro {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  max-width: 700px;
+  margin-inline: auto;
+}
 
 /* ---- Shared Typography ---- */
 .eyebrow {
   font-family: var(--ff-sans);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -85,9 +129,9 @@ a   { color: inherit; text-decoration: none; }
   color: var(--ink);
   margin-bottom: 1rem;
 }
-.section-h2 em    { font-style: italic; color: var(--gold-dk); }
-.section-h2.light { color: #fff; }
-.section-h2.light em { color: var(--gold-lt); }
+.section-h2 em         { font-style: italic; color: var(--gold-dk); }
+.section-h2.light      { color: #fff; }
+.section-h2.light em   { color: var(--gold-lt); }
 
 .section-sub {
   font-size: 1rem;
@@ -95,11 +139,12 @@ a   { color: inherit; text-decoration: none; }
   max-width: 540px;
   line-height: 1.7;
   display: block;
+  margin-inline: auto;
 }
-.section-sub.light { color: rgba(255,255,255,0.5); }
+.section-sub.light { color: rgba(255,255,255,0.45); }
 
 .body-lg {
-  font-size: 1.1rem;
+  font-size: 1.08rem;
   line-height: 1.82;
   color: var(--ink-3);
   margin-bottom: 1.2rem;
@@ -108,7 +153,7 @@ a   { color: inherit; text-decoration: none; }
 .body-lg em     { color: var(--gold-dk); font-style: italic; }
 
 .body-md {
-  font-size: 0.975rem;
+  font-size: 0.96rem;
   line-height: 1.78;
   color: var(--ink-3);
 }
@@ -117,11 +162,16 @@ a   { color: inherit; text-decoration: none; }
 .reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+  will-change: opacity, transform;
 }
 .reveal.visible {
   opacity: 1;
   transform: none;
 }
 
-/* ---- Global Reveal Observer ---- */
+/* ---- Responsive images ---- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; }
+  html    { scroll-behavior: auto; }
+}
