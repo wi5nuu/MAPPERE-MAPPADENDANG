@@ -1,0 +1,209 @@
+---
+const items = [
+  {
+    hour: '09.00',
+    period: 'Pagi',
+    title: 'Mappadendang',
+    desc: 'Pembukaan pesta panen dengan tradisi penumbukan gabah berirama. Enam perempuan berbaju bodo berdiri di kanan-kiri lesung kayu berbentuk perahu, memukul secara berselang-seling dengan tongkat panjang. Tiga pria berposisi segitiga di ujung belakang lesung memberi variasi irama dan ciri khas suara.',
+    duration: 'Berlangsung ±30 menit per sesi · Hingga pukul 12.00',
+    featured: false,
+  },
+  {
+    hour: '12.00',
+    period: 'Siang',
+    title: 'Istirahat',
+    desc: 'Mappadendang berakhir. Masyarakat beristirahat dan makan siang bersama. Momen silaturahmi antar warga dari berbagai penjuru yang datang menyaksikan pesta panen.',
+    duration: 'Jeda siang · Menunggu waktu Dhuhur',
+    featured: false,
+  },
+  {
+    hour: '13.00',
+    period: 'Setelah Dhuhur',
+    title: "Mappere' — Ayunan Raksasa",
+    desc: "Atraksi paling ditunggu-tunggu. Ayunan raksasa dari batang pohon besar yang menyatu di puncak berbentuk V terbalik mengayun peserta ke udara. Dua orang pemegang tali berlari kompak untuk mendorong ayunan semakin tinggi. Setiap sesi berlangsung 7 kali ayunan sebelum peserta berganti.",
+    duration: 'Sistem tim bergiliran · Berlangsung beberapa jam',
+    featured: true,
+    badge: 'Puncak Acara',
+  },
+  {
+    hour: '14.00',
+    period: 'Sore',
+    title: 'Final Olahraga',
+    desc: 'Babak final Voli Putra dan Sepak Takraw Putra. Kompetisi ini sudah dimulai jauh sebelum hari pesta, sehingga saat hari-H tiba, yang tersaji adalah pertandingan puncak paling mendebarkan.',
+    duration: 'Final Voli Putra · Final Sepak Takraw Putra',
+    featured: false,
+  },
+  {
+    hour: 'Malam',
+    period: 'Penutupan',
+    title: 'Penerimaan Hadiah',
+    desc: 'Upacara penutup pesta panen dengan penyerahan hadiah kepada para juara cabang olahraga. Malam yang hangat dan meriah sebagai penutup seluruh rangkaian acara.',
+    duration: 'Penutupan resmi pesta panen',
+    featured: false,
+  },
+];
+---
+
+<section id="rundown" class="section bg-dark">
+  <div class="container">
+    <div class="section-hdr reveal">
+      <p class="eyebrow light">Jadwal Kegiatan</p>
+      <h2 class="section-h2 light">Rundown Hari Pesta Panen</h2>
+      <p class="section-sub light">Seluruh rangkaian berlangsung dari pagi hingga malam dalam satu hari pelaksanaan.</p>
+    </div>
+
+    <div class="timeline">
+      {items.map((item, i) => (
+        <div class={`tl-item reveal-tl${item.featured ? ' tl-featured' : ''}`} style={`--delay:${i * 100}ms`}>
+          <div class="tl-time">
+            <span class="tl-hour">{item.hour}</span>
+            <span class="tl-period">{item.period}</span>
+          </div>
+          <div class="tl-track">
+            <div class={`tl-node${item.featured ? ' tl-node-gold' : ''}`}></div>
+            {i < items.length - 1 && <div class="tl-line"></div>}
+          </div>
+          <div class={`tl-content${item.featured ? ' tl-content-gold' : ''}`}>
+            {item.badge && <span class="tl-badge">{item.badge}</span>}
+            <h3 class="tl-title">{item.title}</h3>
+            <p class="tl-desc">{item.desc}</p>
+            <span class="tl-duration">{item.duration}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll('.reveal-tl');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target as HTMLElement;
+        const delay = el.style.getPropertyValue('--delay') || '0ms';
+        setTimeout(() => el.classList.add('visible'), parseInt(delay));
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(el => io.observe(el));
+</script>
+
+<style>
+.section-hdr { text-align: center; margin-bottom: 4.5rem; }
+.section-hdr .section-sub { margin: 0 auto; }
+
+.timeline {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.tl-item {
+  display: grid;
+  grid-template-columns: 100px 48px 1fr;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.visible { opacity: 1; transform: none; }
+.tl-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-top: 1.4rem;
+  padding-right: 1.5rem;
+}
+.tl-hour {
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gold-lt);
+  line-height: 1;
+}
+.tl-period {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.2rem;
+}
+.tl-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tl-node {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.35);
+  margin-top: 1.65rem;
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.tl-node-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(201,151,74,0.5);
+}
+.tl-item:hover .tl-node { background: var(--gold); }
+.tl-line {
+  flex: 1; width: 1px;
+  background: rgba(255,255,255,0.08);
+  min-height: 24px;
+}
+.tl-content {
+  padding: 1.2rem 0 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: padding-left 0.3s;
+}
+.tl-item:last-child .tl-content { border-bottom: none; }
+.tl-item:hover .tl-content { padding-left: 2rem; }
+.tl-content-gold {
+  border-left: 1px solid rgba(201,151,74,0.3);
+}
+.tl-item:hover .tl-content-gold {
+  border-left-color: var(--gold);
+  padding-left: 2rem;
+}
+.tl-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,151,74,0.4);
+  padding: 0.2rem 0.7rem;
+  border-radius: 2px;
+  margin-bottom: 0.6rem;
+}
+.tl-title {
+  font-family: var(--ff-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.tl-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 0.7rem;
+  max-width: 580px;
+}
+.tl-duration {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+}
+@media (max-width: 640px) {
+  .tl-item { grid-template-columns: 65px 32px 1fr; }
+  .tl-hour  { font-size: 0.9rem; }
+  .tl-time  { padding-right: 0.75rem; }
+  .tl-content { padding-left: 0.75rem; }
+}
+</style>

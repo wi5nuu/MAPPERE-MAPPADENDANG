@@ -1,0 +1,161 @@
+---
+const links = [
+  { href: '#tentang',       label: 'Tentang' },
+  { href: '#tapparareng',   label: 'Tapparareng' },
+  { href: '#rundown',       label: 'Rundown' },
+  { href: '#mappadendang',  label: 'Mappadendang' },
+  { href: '#mappere',       label: "Mappere'" },
+  { href: '#olahraga',      label: 'Olahraga' },
+];
+---
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="brand-line"></div>
+      <span class="brand-name">Calodo Cenrana</span>
+      <div class="brand-line"></div>
+    </div>
+
+    <ul class="nav-links" id="navLinks" role="list">
+      {links.map((l) => (
+        <li><a href={l.href}>{l.label}</a></li>
+      ))}
+    </ul>
+
+    <button class="hamburger" id="navToggle" aria-label="Buka menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const navbar   = document.getElementById('navbar')!;
+  const navLinks = document.getElementById('navLinks')!;
+  const toggle   = document.getElementById('navToggle')!;
+
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  toggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  document.querySelectorAll('#navLinks a').forEach(a =>
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+
+  // Active highlight
+  const sections   = document.querySelectorAll<HTMLElement>('section[id], header[id]');
+  const navAnchors = document.querySelectorAll<HTMLAnchorElement>('#navLinks a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${current}`));
+  }, { passive: true });
+</script>
+
+<style>
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  padding: 1.25rem 0;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+#navbar.scrolled {
+  background: rgba(16,14,11,0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(201,151,74,0.15);
+}
+.nav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-line {
+  width: 28px; height: 1px;
+  background: var(--gold);
+}
+.brand-name {
+  font-family: var(--ff-sans);
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.5rem;
+}
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.35s ease;
+}
+.nav-links a:hover,
+.nav-links a.active { color: rgba(255,255,255,0.9); }
+.nav-links a:hover::after,
+.nav-links a.active::after { width: 100%; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 7px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.bar {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: rgba(255,255,255,0.8);
+  transition: 0.3s;
+}
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(16,14,11,0.97);
+    padding: 1.5rem clamp(1.25rem,5vw,3rem);
+    gap: 1.2rem;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,151,74,0.15);
+  }
+  .hamburger { display: flex; }
+}
+</style>

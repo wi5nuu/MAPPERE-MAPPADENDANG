@@ -1,0 +1,198 @@
+---
+// Structure: 4 bamboo poles forming pyramid apex, ropes diagonal, sandy field, rumah panggung bg
+const steps = [
+  {
+    num: '01',
+    title: 'Pembentukan Tim',
+    desc: 'Peserta dibagi dalam beberapa tim yang akan bergiliran mengayun secara bergantian.',
+  },
+  {
+    num: '02',
+    title: 'Sesi Mengayun',
+    desc: '2 pemegang tali kanan-kiri berlari kompak, mendorong ayunan semakin tinggi setiap langkah.',
+  },
+  {
+    num: '03',
+    title: '7 Kali Ayunan',
+    desc: 'Setiap sesi berlangsung selama tujuh kali ayunan penuh sebelum tim berikutnya masuk.',
+  },
+  {
+    num: '04',
+    title: 'Pergantian Peserta',
+    desc: 'Ayunan ditahan oleh dua orang, lalu peserta berganti untuk memulai sesi berikutnya.',
+  },
+];
+---
+
+<section id="mappere" class="section bg-charcoal">
+  <div class="container">
+    <div class="sec-intro reveal">
+      <p class="eyebrow light">Kegiatan Kedua · Setelah Dhuhur</p>
+      <h2 class="section-h2 light"><em>Mappere'</em></h2>
+      <p class="section-sub light">Ayunan raksasa — puncak atraksi yang memukau ribuan penonton</p>
+    </div>
+
+    <div class="mpr-grid">
+      <!-- Text side -->
+      <div class="mpr-text">
+        <div class="seg reveal">
+          <h3 class="seg-title-lt">Struktur Ayunan</h3>
+          <p class="p-lt">
+            Mappere dibangun dari <strong>dua tiang kayu besar</strong> yang condong ke dalam
+            satu sama lain — namun ujung kedua tiang tidak saling menyentuh. Masing-masing
+            tiang utama ditopang oleh <strong>dua bambu penyangga</strong> di sisinya
+            (total 4 bambu), sehingga setiap tiang berdiri kokoh meski bersandar ke dalam.
+            Di ujung paling atas kedua tiang, dipasang <strong>satu bambu pendek horizontal</strong>
+            sebagai penghubung sekaligus gantungan — dari sinilah tali-tali ayunan
+            menjulur ke bawah. Siluet keseluruhan strukturnya berbentuk seperti
+            <strong class="shape">/ ‒ \</strong> jika dilihat dari depan.
+          </p>
+        </div>
+
+        <div class="seg reveal">
+          <h3 class="seg-title-lt">Cara Mengayun</h3>
+          <p class="p-lt">
+            Dua orang pemegang tali berdiri berhadapan — satu di kanan, satu di kiri.
+            Keduanya berlari mundur-maju secara kompak sambil menarik-mendorong tali panjang
+            yang menjulur dari puncak piramid. Semakin kompak gerakan keduanya dan semakin
+            jauh mereka berlari, semakin tinggi dan kencang ayunan berayun ke udara.
+            Perempuan yang diayun mengenakan <strong>baju bodo</strong> adat Bugis
+            lengkap dengan perhiasan tradisional, disaksikan ribuan warga yang memadati
+            seluruh lapangan berpasir di sekeliling struktur.
+          </p>
+        </div>
+
+        <div class="steps-grid reveal">
+          {steps.map((s) => (
+            <div class="mstep">
+              <span class="mstep-num">{s.num}</span>
+              <div class="mstep-body">
+                <strong>{s.title}</strong>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Sticky image -->
+      <div class="mpr-media reveal">
+        <div class="img-wrap-dark">
+          <img
+            src="/img/mappere.jpg"
+            alt="Mappere Calodo Cenrana — dua tiang kayu besar condong ke dalam membentuk /-\, masing-masing ditopang dua bambu penyangga, bambu pendek horizontal di puncak sebagai gantungan tali, wanita berbaju bodo diayun di tengah, dua orang pengayun, lapangan berpasir, rumah panggung Bugis di latar belakang"
+            loading="lazy"
+          />
+        </div>
+        <p class="img-cap-lt">
+          Dua tiang kayu besar condong ke dalam (ujungnya tidak menyentuh), masing-masing
+          ditopang dua bambu penyangga. Bambu pendek di puncak menjadi gantungan tali ayunan.
+          Perempuan berbaju bodo berayun di antara ribuan warga Calodo yang memadati
+          lapangan berpasir — rumah panggung Bugis berdiri kokoh di latar belakang.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.mpr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.mpr-media { position: sticky; top: 100px; }
+.img-wrap-dark {
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.img-wrap-dark img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+.mpr-media:hover .img-wrap-dark img { transform: scale(1.03); }
+.img-cap-lt {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.85rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(201,151,74,0.4);
+  font-style: italic;
+}
+
+.mpr-text { display: flex; flex-direction: column; gap: 2.5rem; }
+.seg-title-lt {
+  font-family: var(--ff-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+.p-lt {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.55);
+}
+.p-lt strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+.mstep {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.2rem;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+}
+.mstep:hover { background: rgba(255,255,255,0.04); }
+.mstep-num {
+  font-family: var(--ff-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(201,151,74,0.25);
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.3s;
+}
+.mstep:hover .mstep-num { color: var(--gold-lt); }
+.mstep-body strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.3rem;
+}
+.mstep-body p {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 960px) {
+  .mpr-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .mpr-text { order: 2; }
+  .mpr-media { order: 1; position: static; }
+  .steps-grid { grid-template-columns: 1fr; }
+}
+.shape {
+  display: inline-block;
+  font-family: var(--ff-serif);
+  font-size: 1.05em;
+  color: var(--gold-lt);
+  letter-spacing: 0.08em;
+  font-style: normal;
+}
+</style>

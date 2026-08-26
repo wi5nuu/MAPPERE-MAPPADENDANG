@@ -1,0 +1,21 @@
+---
+const stats = [
+  { value: '2026', label: 'Tahun Pelaksanaan' },
+  { value: '2', label: 'Prosesi Adat Utama' },
+  { value: '6+', label: 'Rangkaian Acara' },
+  { value: 'Gratis', label: 'Tiket Masuk' },
+];
+---
+
+<section class="stats">
+  <div class="container stats-grid">
+    {
+      stats.map((s) => (
+        <div class="stat-card reveal">
+          <strong>{s.value}</strong>
+          <span>{s.label}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>

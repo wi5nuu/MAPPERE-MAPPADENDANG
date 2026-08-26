@@ -1,0 +1,268 @@
+---
+const seasons = [
+  {
+    icon: '🌧',
+    season: 'Musim Hujan',
+    title: 'Berubah Menjadi Danau',
+    desc: 'Ketika curah hujan tinggi dan sungai meluap, Tapparareng berubah menjadi hamparan danau dangkal yang luas. Warga menggunakan perahu tradisional dan mottoro tassi (perahu motor) untuk beraktivitas — termasuk mengangkut karung-karung padi hasil panen ke darat.',
+    color: '#3a7bd5',
+  },
+  {
+    icon: '☀',
+    season: 'Musim Kering',
+    title: 'Menjadi Sawah Subur',
+    desc: 'Ketika air surut dan Tapparareng mengering, tanahnya yang subur siap ditanami padi. Hamparan sawah hijau yang baru tertanam menjadi pemandangan yang menawan — inilah sumber panen yang dirayakan setiap tahun dalam Pesta Panen Calodo.',
+    color: '#d4a017',
+  },
+];
+
+const fish = [
+  { name: 'Ikan Mujair',    note: 'Tilapia' },
+  { name: 'Ikan Gabus',     note: 'Snakehead' },
+  { name: 'Belut',          note: 'Sidat / Eel' },
+  { name: "Bale Cambang",   note: 'Lokal Bugis' },
+  { name: "Bale Ceppe'",    note: 'Lokal Bugis' },
+  { name: 'Bale Jahele',    note: 'Lokal Bugis' },
+  { name: 'Bale Salo',      note: 'Lokal Bugis' },
+  { name: 'Lenrong',        note: 'Lokal Bugis' },
+  { name: 'Bale Kamboja',   note: 'Lokal Bugis' },
+];
+---
+
+<section id="tapparareng" class="section bg-charcoal">
+  <div class="container">
+    <div class="tpr-grid">
+      <!-- Sticky image -->
+      <div class="tpr-media reveal">
+        <div class="img-wrap-dark">
+          <img
+            src="/img/tapparareng.jpg"
+            alt="Tapparareng Calodo Cenrana — hamparan sawah yang berubah menjadi danau saat musim hujan, perahu tradisional mengangkut padi, rumah-rumah Bugis di tepi air, dikelilingi hutan tropis Sulawesi"
+            loading="lazy"
+          />
+        </div>
+        <p class="img-cap-lt">
+          Tapparareng saat musim hujan — sawah berubah menjadi danau luas. Perahu tradisional
+          dan mottoro tassi lalu-lalang mengangkut hasil panen. Saat kering, tanah ini
+          kembali menjadi sawah subur yang siap ditanami padi.
+        </p>
+        <div class="tpr-quote">
+          <span class="tpr-q-mark">"</span>
+          <p>Tanah yang sama, dua wajah berbeda — danau di musim hujan, sawah di musim kering.</p>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="tpr-text">
+        <div class="reveal">
+          <p class="eyebrow light">Keunikan Alam Calodo</p>
+          <h2 class="section-h2 light"><em>Tapparareng</em></h2>
+          <p class="section-sub light">Lahan sawah unik yang berubah wajah mengikuti pergantian musim</p>
+        </div>
+
+        <div class="seg-lt reveal">
+          <p class="p-lt">
+            Di Calodo terdapat wilayah yang dikenal sebagai <strong class="hl">Tapparareng</strong>
+            — sebuah hamparan lahan pertanian yang memiliki sungai di sisinya. Keunikannya
+            terletak pada perubahannya yang dramatis mengikuti musim: ketika musim hujan tiba
+            dan sungai meluap, seluruh kawasan ini berubah wujud menjadi <strong class="hl">
+            hamparan danau yang luas</strong>. Namun saat musim kering datang dan air surut,
+            tanah yang sama kembali terbuka sebagai <strong class="hl">sawah subur</strong>
+            yang siap ditanami padi.
+          </p>
+        </div>
+
+        <div class="season-cards reveal">
+          {seasons.map((s) => (
+            <div class="season-card" style={`--sc: ${s.color}`}>
+              <div class="sc-head">
+                <span class="sc-season">{s.season}</span>
+                <h3 class="sc-title">{s.title}</h3>
+              </div>
+              <p class="sc-desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="seg-lt reveal">
+          <h3 class="seg-title-lt">Mengangkut Padi dengan Perahu</h3>
+          <p class="p-lt">
+            Salah satu pemandangan yang paling khas saat musim panen bertepatan dengan
+            musim hujan adalah proses pengangkutan hasil panen. Karung-karung berisi padi
+            yang telah dipanen dibawa menggunakan <strong class="hl">perahu tradisional</strong>
+            menyeberangi genangan Tapparareng menuju daratan. Ketika kondisi memungkinkan,
+            warga juga menggunakan <strong class="hl">mottoro tassi</strong> — perahu
+            bermotor — untuk mempercepat proses pengangkutan. Inilah keunikan bertani
+            di Calodo yang tidak ditemukan di tempat lain.
+          </p>
+        </div>
+
+        <div class="seg-lt reveal">
+          <h3 class="seg-title-lt">Surga Ikan Lokal</h3>
+          <p class="p-lt">
+            Tapparareng bukan sekadar lahan pertanian — ia juga menjadi <strong class="hl">tempat
+            mencari ikan</strong> bagi warga Calodo. Berbagai jenis ikan berkumpul di perairan
+            dangkalnya yang kaya nutrisi, mulai dari ikan yang dikenal luas hingga
+            jenis-jenis lokal Bugis yang hanya ditemukan di perairan seperti ini.
+          </p>
+          <div class="fish-grid">
+            {fish.map((f) => (
+              <div class="fish-tag">
+                <span class="fish-name">{f.name}</span>
+                <span class="fish-note">{f.note}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.tpr-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.tpr-media { position: sticky; top: 100px; }
+.img-wrap-dark {
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.img-wrap-dark img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+.tpr-media:hover .img-wrap-dark img { transform: scale(1.03); }
+.img-cap-lt {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.35);
+  margin-top: 0.85rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(201,151,74,0.4);
+  font-style: italic;
+}
+.tpr-quote {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+.tpr-q-mark {
+  font-family: var(--ff-serif);
+  font-size: 3rem;
+  line-height: 0.8;
+  color: rgba(201,151,74,0.25);
+  flex-shrink: 0;
+}
+.tpr-quote p {
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.55;
+}
+
+.tpr-text { display: flex; flex-direction: column; gap: 2.5rem; }
+
+.seg-lt { display: flex; flex-direction: column; gap: 0.6rem; }
+.seg-title-lt {
+  font-family: var(--ff-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+.p-lt {
+  font-size: 0.95rem;
+  line-height: 1.82;
+  color: rgba(255,255,255,0.52);
+}
+.hl { color: var(--gold-lt); font-weight: 500; }
+
+.season-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.season-card {
+  padding: 1.5rem;
+  background: var(--charcoal);
+  transition: background 0.3s;
+}
+.season-card:hover { background: rgba(255,255,255,0.03); }
+.sc-head { margin-bottom: 0.75rem; }
+.sc-season {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sc, var(--gold));
+  border: 1px solid currentColor;
+  padding: 0.18rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  opacity: 0.7;
+}
+.sc-title {
+  font-family: var(--ff-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+.sc-desc { font-size: 0.82rem; line-height: 1.65; color: rgba(255,255,255,0.4); }
+
+@media (max-width: 960px) {
+  .tpr-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .tpr-media { position: static; }
+  .season-cards { grid-template-columns: 1fr; }
+}
+
+/* Fish grid */
+.fish-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.fish-tag {
+  display: flex;
+  flex-direction: column;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid rgba(201,151,74,0.2);
+  border-radius: 3px;
+  background: rgba(201,151,74,0.04);
+  transition: background 0.3s, border-color 0.3s;
+  cursor: default;
+}
+.fish-tag:hover {
+  background: rgba(201,151,74,0.1);
+  border-color: rgba(201,151,74,0.45);
+}
+.fish-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.2;
+}
+.fish-note {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.28);
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+</style>

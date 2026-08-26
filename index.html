@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesta Panen Calodo Cenrana — Tradisi Syukur Masyarakat Bugis</title>
+  <meta name="description" content="Pesta Panen tahunan Calodo Cenrana menampilkan Mappadendang, Mappere ayunan raksasa, dan final olahraga — perayaan syukur atas hasil padi dan kebun masyarakat Bugis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-line"></div>
+        <span class="brand-name">Calodo Cenrana</span>
+        <div class="brand-line"></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#rundown">Rundown</a></li>
+        <li><a href="#mappadendang">Mappadendang</a></li>
+        <li><a href="#mappere">Mappere</a></li>
+        <li><a href="#olahraga">Olahraga</a></li>
+      </ul>
+      <button class="hamburger" id="navToggle" aria-label="Buka menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header id="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+
+    <!-- Particle canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="hero-content" id="heroContent">
+      <p class="hero-eyebrow">Tradisi Tahunan · Calodo, Cenrana · Sulawesi Selatan</p>
+      <h1 class="hero-title">
+        <span class="title-line">Pesta</span>
+        <span class="title-line title-gold">Panen</span>
+        <span class="title-line title-thin">Calodo Cenrana</span>
+      </h1>
+      <p class="hero-desc">
+        Wujud syukur atas hasil padi dan kebun yang diturunkan leluhur,<br>
+        dirayakan setiap tahun dengan penuh khidmat dan kegembiraan.
+      </p>
+      <div class="hero-pills">
+        <span class="pill">09.00 – 15.00 WITA</span>
+        <span class="pill-divider">·</span>
+        <span class="pill">Setiap Tahun</span>
+        <span class="pill-divider">·</span>
+        <span class="pill">Bugis Bone</span>
+      </div>
+      <a href="#rundown" class="cta-btn" id="ctaBtn">
+        <span>Lihat Rangkaian Acara</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-scroll" id="heroScroll">
+      <div class="scroll-track">
+        <div class="scroll-thumb"></div>
+      </div>
+      <span>Gulir</span>
+    </div>
+
+    <!-- Bottom info bar -->
+    <div class="hero-infobar">
+      <div class="infobar-item">
+        <span class="infobar-label">Lokasi</span>
+        <span class="infobar-val">Calodo, Cenrana, Bone</span>
+      </div>
+      <div class="infobar-sep"></div>
+      <div class="infobar-item">
+        <span class="infobar-label">Durasi</span>
+        <span class="infobar-val">6 Jam Penuh</span>
+      </div>
+      <div class="infobar-sep"></div>
+      <div class="infobar-item">
+        <span class="infobar-label">Tradisi</span>
+        <span class="infobar-val">Bugis · Pesta Pascapanen</span>
+      </div>
+      <div class="infobar-sep"></div>
+      <div class="infobar-item">
+        <span class="infobar-label">Acara Utama</span>
+        <span class="infobar-val">Mappadendang · Mappere · Olahraga</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== TENTANG ===== -->
+  <section id="tentang" class="section">
+    <div class="container">
+      <div class="two-col">
+        <div class="col-left">
+          <p class="eyebrow">Mengenal Tradisi</p>
+          <h2 class="section-h2">Pesta Panen<br><em>Calodo Cenrana</em></h2>
+        </div>
+        <div class="col-right">
+          <p class="body-lg">
+            Pesta Panen Calodo Cenrana adalah tradisi syukur tahunan yang berakar kuat
+            dalam kehidupan agraris masyarakat Bugis di Cenrana, Bone. Dikhususkan untuk
+            warga <strong>Calodo</strong> — berbeda dengan tradisi di Tellu Siattinge —
+            pesta ini merayakan berkah dari sawah dan kebun yang telah memberikan kehidupan.
+          </p>
+          <p class="body-md">
+            Dari pagi hingga sore, masyarakat berkumpul dalam satu lapangan terbuka untuk
+            menjalankan tiga rangkaian kegiatan utama: ritual penumbukan gabah berirama dalam
+            <em>Mappadendang</em>, atraksi ayunan raksasa <em>Mappere</em>, dan babak final
+            pertandingan olahraga yang telah dipersiapkan jauh sebelum hari pesta.
+          </p>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <div class="metric-item reveal">
+          <span class="metric-num">6</span>
+          <span class="metric-unit">Jam</span>
+          <span class="metric-label">Durasi Acara Penuh</span>
+        </div>
+        <div class="metric-item reveal">
+          <span class="metric-num">±30</span>
+          <span class="metric-unit">Meter</span>
+          <span class="metric-label">Ketinggian Ayunan Mappere</span>
+        </div>
+        <div class="metric-item reveal">
+          <span class="metric-num">7×</span>
+          <span class="metric-unit">Putaran</span>
+          <span class="metric-label">Setiap Sesi Mappere</span>
+        </div>
+        <div class="metric-item reveal">
+          <span class="metric-num">3</span>
+          <span class="metric-unit">Kegiatan</span>
+          <span class="metric-label">Mappadendang · Mappere · Olahraga</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RUNDOWN ===== -->
+  <section id="rundown" class="section bg-dark">
+    <div class="container">
+      <div class="section-header-centered">
+        <p class="eyebrow light">Jadwal Kegiatan</p>
+        <h2 class="section-h2 light">Rundown Hari Pesta Panen</h2>
+        <p class="section-sub light">Seluruh rangkaian berlangsung dari pagi hingga malam dalam satu hari pelaksanaan.</p>
+      </div>
+
+      <div class="timeline" id="timeline">
+
+        <div class="tl-item reveal-tl">
+          <div class="tl-time">
+            <span class="tl-hour">09.00</span>
+            <span class="tl-period">Pagi</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-node"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <h3 class="tl-title">Mappadendang</h3>
+            <p class="tl-desc">Pembukaan pesta panen dengan tradisi penumbukan gabah berirama. Enam perempuan berbaju bodo berdiri di kanan-kiri lesung kayu berbentuk perahu, memukul secara berselang-seling dengan tongkat panjang. Tiga pria berposisi segitiga di ujung belakang lesung memberi variasi irama dan ciri khas suara.</p>
+            <span class="tl-duration">Berlangsung ±30 menit per sesi · Hingga pukul 12.00</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl">
+          <div class="tl-time">
+            <span class="tl-hour">12.00</span>
+            <span class="tl-period">Siang</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-node"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <h3 class="tl-title">Istirahat</h3>
+            <p class="tl-desc">Mappadendang berakhir. Masyarakat beristirahat dan makan siang bersama. Momen silaturahmi antar warga dari berbagai penjuru yang datang menyaksikan pesta panen.</p>
+            <span class="tl-duration">Jeda siang · Menunggu waktu Dhuhur</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl tl-featured">
+          <div class="tl-time">
+            <span class="tl-hour">13.00</span>
+            <span class="tl-period">Setelah Dhuhur</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-node tl-node-gold"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content tl-content-gold">
+            <div class="tl-badge">Puncak Acara</div>
+            <h3 class="tl-title">Mappere — Ayunan Raksasa</h3>
+            <p class="tl-desc">Atraksi paling ditunggu-tunggu. Ayunan raksasa setinggi ±30 meter mengayun peserta ke udara. Dua orang pemegang tali di kanan-kiri berlari sekuat-kuatnya untuk mendorong ayunan semakin tinggi. Setiap sesi berlangsung 7 kali ayunan sebelum peserta berganti.</p>
+            <span class="tl-duration">Sistem tim bergiliran · Berlangsung beberapa jam</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl">
+          <div class="tl-time">
+            <span class="tl-hour">14.00</span>
+            <span class="tl-period">Sore</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-node"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <h3 class="tl-title">Final Olahraga</h3>
+            <p class="tl-desc">Babak final Voli Putra dan Sepak Takraw Putra. Kompetisi ini sudah dimulai jauh sebelum hari pesta, sehingga saat hari-H tiba, yang tersaji adalah pertandingan puncak paling mendebarkan.</p>
+            <span class="tl-duration">Final Voli Putra · Final Sepak Takraw Putra</span>
+          </div>
+        </div>
+
+        <div class="tl-item reveal-tl">
+          <div class="tl-time">
+            <span class="tl-hour">Malam</span>
+            <span class="tl-period">Penutupan</span>
+          </div>
+          <div class="tl-track">
+            <div class="tl-node"></div>
+          </div>
+          <div class="tl-content">
+            <h3 class="tl-title">Penerimaan Hadiah</h3>
+            <p class="tl-desc">Upacara penutup pesta panen dengan penyerahan hadiah kepada para juara cabang olahraga. Malam yang hangat dan meriah sebagai penutup seluruh rangkaian acara.</p>
+            <span class="tl-duration">Penutupan resmi pesta panen</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAPPADENDANG ===== -->
+  <section id="mappadendang" class="section">
+    <div class="container">
+      <div class="section-intro reveal">
+        <p class="eyebrow">Kegiatan Pertama · 09.00 – 12.00</p>
+        <h2 class="section-h2"><em>Mappadendang</em></h2>
+        <p class="section-sub">Penumbukan gabah berirama sebagai ritual syukur atas keberhasilan panen</p>
+      </div>
+
+      <div class="media-text-block">
+        <div class="media-block reveal">
+          <img src="img/mappadendang_hero.jpg"
+               alt="Mappadendang Calodo — lesung perahu dengan 6 perempuan berbaju bodo dan 3 pria bersegitiga di belakang"
+               class="main-img" loading="lazy" />
+          <p class="img-caption">
+            Lesung berbentuk perahu dengan isian beras, bunga, dan dedaunan. Perempuan berbaju bodo
+            berdiri di kanan-kiri, tiga pria berposisi segitiga di ujung belakang.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <div class="text-segment reveal">
+            <h3 class="seg-title">Lesung Berbentuk Perahu</h3>
+            <p>Lesung dalam Mappadendang Calodo berbentuk memanjang seperti perahu dengan bagian belakang
+            yang lebih tipis dan kecil. Di dalam badan lesung diisi dengan gabah, bunga-bunga segar,
+            dan beberapa helai dedaunan sebagai simbol kesuburan dan syukur kepada Yang Maha Kuasa.</p>
+          </div>
+
+          <div class="text-segment reveal">
+            <h3 class="seg-title">Formasi &amp; Peran</h3>
+            <p>Enam perempuan berbaju bodo berdiri berhadapan di sisi kanan dan kiri lesung, memukul
+            dengan tongkat panjang secara berselang-seling sehingga suara dan tempo menyatu harmonis.
+            Di ujung belakang lesung, tiga pria membentuk formasi segitiga — satu di tengah belakang,
+            satu di kanan, satu di kiri — memukul bagian belakang yang lebih kecil untuk memberi variasi
+            irama dan ciri khas suara yang menjadi identitas Mappadendang Calodo.</p>
+          </div>
+
+          <div class="text-segment reveal">
+            <h3 class="seg-title">Irama &amp; Tempo</h3>
+            <p>Orang di sisi kiri memainkan pola dua ketukan, sementara sisi kanan memainkan tiga ketukan.
+            Keduanya berselang-seling menciptakan melodi perkusi yang kaya. Satu sesi berlangsung sekitar
+            30 menit, menghasilkan suara tumbukan yang enak didengar dan terasa khas oleh seluruh
+            masyarakat yang hadir.</p>
+          </div>
+
+          <div class="detail-list reveal">
+            <div class="detail-row">
+              <span class="detail-key">Pakaian Wanita</span>
+              <span class="detail-val">Baju Bodo, pakaian adat Bugis</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-key">Pakaian Pria</span>
+              <span class="detail-val">Topi adat Bugis (passapu) atau bebas</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-key">Durasi per Sesi</span>
+              <span class="detail-val">±30 menit</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-key">Isi Lesung</span>
+              <span class="detail-val">Gabah, bunga segar, dedaunan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAPPERE ===== -->
+  <section id="mappere" class="section bg-charcoal">
+    <div class="container">
+      <div class="section-intro reveal">
+        <p class="eyebrow light">Kegiatan Kedua · Setelah Dhuhur</p>
+        <h2 class="section-h2 light"><em>Mappere'</em></h2>
+        <p class="section-sub light">Ayunan raksasa — puncak atraksi yang memukau ribuan penonton</p>
+      </div>
+
+      <div class="media-text-block reverse">
+        <div class="media-block reveal">
+          <img src="img/mappere_swing.jpg"
+               alt="Mappere Calodo — ayunan raksasa dua tiang kayu besar dengan orang diayun tinggi"
+               class="main-img" loading="lazy" />
+          <p class="img-caption light-cap">
+            Dua tiang kayu besar kanan-kiri dengan tali tebal. Peserta diayun tinggi
+            sementara ribuan warga menyaksikan dengan penuh kekaguman.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <div class="text-segment reveal">
+            <h3 class="seg-title light-seg">Struktur Ayunan</h3>
+            <p class="light-p">Mappere menggunakan dua batang kayu besar yang ditancapkan kokoh di tanah pada sisi
+            kanan dan kiri. Di bagian atas, dipasang bambu sebagai penyangga tempat roll tali.
+            Dari sana, dua tali besar diturunkan ke kanan dan kiri, diikatkan pada kursi kayu
+            tempat duduk orang yang akan diayun.</p>
+          </div>
+
+          <div class="text-segment reveal">
+            <h3 class="seg-title light-seg">Cara Mengayun</h3>
+            <p class="light-p">Dua orang pemegang tali berdiri di kanan dan kiri. Mereka berlari mundur-maju
+            secara kompak sambil menarik-mendorong tali memanjang. Semakin kompak keduanya
+            bergerak dan semakin jauh mereka berlari, semakin tinggi dan cepat ayunan bergerak
+            ke udara.</p>
+          </div>
+
+          <div class="mappere-steps reveal">
+            <div class="mstep">
+              <div class="mstep-num">01</div>
+              <div class="mstep-body">
+                <strong>Pembentukan Tim</strong>
+                <p>Peserta dibagi dalam beberapa tim yang akan bergiliran mengayun secara bergantian.</p>
+              </div>
+            </div>
+            <div class="mstep">
+              <div class="mstep-num">02</div>
+              <div class="mstep-body">
+                <strong>Sesi Mengayun</strong>
+                <p>2 pemegang tali kanan-kiri berlari kompak, mendorong ayunan semakin tinggi setiap langkah.</p>
+              </div>
+            </div>
+            <div class="mstep">
+              <div class="mstep-num">03</div>
+              <div class="mstep-body">
+                <strong>7 Kali Ayunan</strong>
+                <p>Setiap sesi berlangsung selama tujuh kali ayunan penuh sebelum tim berikutnya masuk.</p>
+              </div>
+            </div>
+            <div class="mstep">
+              <div class="mstep-num">04</div>
+              <div class="mstep-body">
+                <strong>Pergantian &amp; Penahanan</strong>
+                <p>Ayunan ditahan oleh dua orang lain, lalu peserta berganti untuk sesi berikutnya.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OLAHRAGA ===== -->
+  <section id="olahraga" class="section">
+    <div class="container">
+      <div class="section-intro reveal">
+        <p class="eyebrow">Kegiatan Ketiga · Sore Hari</p>
+        <h2 class="section-h2">Final <em>Olahraga</em></h2>
+        <p class="section-sub">Pertandingan puncak yang sudah dipersiapkan jauh sebelum hari pesta</p>
+      </div>
+
+      <div class="sport-grid">
+        <div class="sport-media reveal">
+          <img src="img/volley_takraw.jpg"
+               alt="Final Voli dan Sepak Takraw dalam Pesta Panen Calodo Cenrana"
+               class="main-img" loading="lazy" />
+          <p class="img-caption">Aksi final yang penuh semangat dengan dukungan seluruh masyarakat Calodo</p>
+        </div>
+
+        <div class="sport-info">
+          <p class="body-md reveal">
+            Kompetisi olahraga sudah bergulir sejak hari-hari sebelum pesta panen.
+            Ketika hari pesta tiba, yang digelar adalah babak final — pertandingan
+            paling menentukan yang ditunggu-tunggu seluruh warga.
+          </p>
+
+          <div class="sport-cards">
+            <div class="sport-card reveal">
+              <div class="sport-num">01</div>
+              <div class="sport-detail">
+                <h3>Voli Putra</h3>
+                <p>Final bergengsi antara dua tim terbaik yang telah melewati seluruh fase penyisihan. Dukungan penonton membakar semangat para atlet di lapangan.</p>
+              </div>
+            </div>
+            <div class="sport-card reveal">
+              <div class="sport-num">02</div>
+              <div class="sport-detail">
+                <h3>Sepak Takraw Putra</h3>
+                <p>Olahraga warisan Nusantara dengan gerakan akrobatik memukau. Tendangan bicycle kick para atlet selalu menjadi sorotan utama penonton.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="award-box reveal">
+            <div class="award-line"></div>
+            <div class="award-text">
+              <h3>Penerimaan Hadiah</h3>
+              <p>Di malam harinya, seluruh rangkaian pesta panen ditutup dengan upacara penyerahan penghargaan kepada para juara kedua cabang olahraga — momen yang menghangatkan seluruh masyarakat Calodo Cenrana.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p class="footer-loc">Calodo · Cenrana · Bone · Sulawesi Selatan</p>
+        <h2 class="footer-title">Pesta Panen<br><em>Calodo Cenrana</em></h2>
+        <p class="footer-tagline">Merayakan syukur, melestarikan warisan leluhur, mempererat tali persaudaraan.</p>
+      </div>
+      <div class="footer-bar">
+        <span>Tradisi Bugis · Sulawesi Selatan</span>
+        <span class="footer-dot">·</span>
+        <span>Warisan Budaya Lokal Calodo Cenrana</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

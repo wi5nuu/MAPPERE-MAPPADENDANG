@@ -1,0 +1,285 @@
+---
+---
+
+<!-- Floating Music Player -->
+<div id="mpHint" class="mp-hint" aria-live="polite">
+  <span>🎵 Sentuh untuk memutar lagu Bugis</span>
+  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+    <path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</div>
+<div id="music-player" class="mp" aria-label="Pemutar musik latar" role="region">
+  <audio id="bgAudio" loop preload="none">
+    <source src="/audio/bugis_tana_ogi_wanuakku.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button id="mpBtn" class="mp-btn" aria-label="Putar / Jeda musik" title="Tana Ogi Wanuakku — Lagu Bugis">
+    <span class="mp-icon" id="mpIcon">
+      <!-- Play icon -->
+      <svg class="ico-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <!-- Pause icon -->
+      <svg class="ico-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+      </svg>
+    </span>
+    <span class="mp-wave" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </span>
+  </button>
+
+  <div class="mp-info">
+    <span class="mp-title">Tana Ogi Wanuakku</span>
+    <span class="mp-sub">Lagu Daerah Bugis</span>
+  </div>
+
+  <div class="mp-vol">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    </svg>
+    <input id="volSlider" type="range" min="0" max="1" step="0.05" value="0.45" aria-label="Volume" />
+  </div>
+</div>
+
+<script>
+  const audio     = document.getElementById('bgAudio') as HTMLAudioElement;
+  const btn       = document.getElementById('mpBtn')!;
+  const player    = document.getElementById('music-player')!;
+  const volSlider = document.getElementById('volSlider') as HTMLInputElement;
+  const hint      = document.getElementById('mpHint')!;
+
+  audio.volume = 0.45;
+  let started = false;
+
+  function setPlaying(playing: boolean) {
+    player.classList.toggle('playing', playing);
+    btn.setAttribute('aria-label', playing ? 'Jeda musik' : 'Putar musik');
+  }
+
+  function hideHint() {
+    hint.classList.add('hint-gone');
+  }
+
+  function startMusic() {
+    if (started) return;
+    audio.play()
+      .then(() => {
+        started = true;
+        setPlaying(true);
+        hideHint();
+      })
+      .catch(() => {
+        /* Blocked — keep hint visible */
+      });
+  }
+
+  /* Try immediately (some browsers allow it) */
+  startMusic();
+
+  /* Fallback: first user interaction */
+  const events = ['click','scroll','keydown','touchstart','pointerdown','mousemove'];
+  events.forEach(ev =>
+    document.addEventListener(ev, function handler() {
+      startMusic();
+      if (started) events.forEach(e => document.removeEventListener(e, handler));
+    }, { passive: true })
+  );
+
+  /* Toggle play/pause via button */
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().then(() => { started = true; setPlaying(true); hideHint(); });
+    } else {
+      audio.pause();
+      setPlaying(false);
+    }
+  });
+
+  /* Volume */
+  volSlider.addEventListener('input', () => { audio.volume = parseFloat(volSlider.value); });
+
+  audio.addEventListener('play',  () => { setPlaying(true); hideHint(); });
+  audio.addEventListener('pause', () => setPlaying(false));
+
+  /* Resume after tab switch */
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && started && audio.paused) {
+      audio.play().catch(() => {});
+    }
+  });
+</script>
+
+<style>
+/* ---- Floating Player ---- */
+#music-player {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(16,14,11,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(201,151,74,0.2);
+  border-radius: 50px;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  transition: border-color 0.4s, box-shadow 0.4s;
+  max-width: calc(100vw - 3rem);
+}
+#music-player.playing {
+  border-color: rgba(201,151,74,0.5);
+  box-shadow: 0 8px 40px rgba(201,151,74,0.15);
+}
+
+/* Button */
+.mp-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--gold, #C9974A);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  transition: background 0.3s, transform 0.2s;
+  color: #100E0B;
+}
+.mp-btn:hover { background: #E2B96F; transform: scale(1.08); }
+.mp-btn:active { transform: scale(0.95); }
+
+/* Icons — show play by default, pause when playing */
+.ico-play, .ico-pause { position: absolute; transition: opacity 0.2s; }
+.ico-pause { opacity: 0; }
+#music-player.playing .ico-play  { opacity: 0; }
+#music-player.playing .ico-pause { opacity: 1; }
+
+/* Wave bars — visible only when playing */
+.mp-wave {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#music-player.playing .ico-play,
+#music-player.playing .ico-pause { display: none; }
+#music-player.playing .mp-wave { opacity: 1; }
+.mp-wave span {
+  display: block;
+  width: 3px;
+  background: #100E0B;
+  border-radius: 2px;
+  animation: wave 1.1s ease-in-out infinite;
+}
+.mp-wave span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+.mp-wave span:nth-child(2) { height: 16px; animation-delay: 0.15s; }
+.mp-wave span:nth-child(3) { height: 12px; animation-delay: 0.3s; }
+.mp-wave span:nth-child(4) { height: 7px;  animation-delay: 0.45s; }
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.5); }
+  50%       { transform: scaleY(1.4); }
+}
+
+/* Info text */
+.mp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.mp-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mp-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* Volume */
+.mp-vol {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+}
+#volSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px; height: 3px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+#volSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--gold, #C9974A);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+#volSlider::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+@media (max-width: 480px) {
+  #music-player { bottom: 1rem; right: 1rem; padding: 0.45rem 0.75rem 0.45rem 0.45rem; }
+  .mp-vol { display: none; }
+  .mp-info .mp-title { font-size: 0.72rem; }
+  .mp-hint { right: 1rem; bottom: 5.5rem; }
+}
+
+/* Tap hint bubble */
+.mp-hint {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gold, #C9974A);
+  color: #100E0B;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(201,151,74,0.45);
+  animation: hintPulse 2s ease-in-out infinite, hintFadeIn 0.8s ease 1s both;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.hint-gone {
+  opacity: 0 !important;
+  transform: translateY(8px) !important;
+  pointer-events: none !important;
+}
+@keyframes hintPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(201,151,74,0.4); }
+  50%       { box-shadow: 0 4px 32px rgba(201,151,74,0.75); }
+}
+@keyframes hintFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+</style>

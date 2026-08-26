@@ -1,0 +1,163 @@
+---
+const sports = [
+  {
+    num: '01',
+    title: 'Voli Putra',
+    desc: 'Final bergengsi antara dua tim terbaik yang telah melewati seluruh fase penyisihan. Dukungan penonton membakar semangat para atlet di lapangan.',
+  },
+  {
+    num: '02',
+    title: 'Sepak Takraw Putra',
+    desc: 'Olahraga warisan Nusantara dengan gerakan akrobatik memukau. Tendangan bicycle kick para atlet selalu menjadi sorotan utama penonton.',
+  },
+];
+---
+
+<section id="olahraga" class="section">
+  <div class="container">
+    <div class="sec-intro reveal">
+      <p class="eyebrow">Kegiatan Ketiga · Sore Hari</p>
+      <h2 class="section-h2">Final <em>Olahraga</em></h2>
+      <p class="section-sub">Pertandingan puncak yang sudah dipersiapkan jauh sebelum hari pesta</p>
+    </div>
+
+    <div class="ol-grid">
+      <div class="ol-media reveal">
+        <div class="img-wrap">
+          <img
+            src="/img/olahraga.jpg"
+            alt="Final Voli dan Sepak Takraw dalam Pesta Panen Calodo Cenrana"
+            loading="lazy"
+          />
+        </div>
+        <p class="img-cap">Aksi final yang penuh semangat dengan dukungan seluruh masyarakat Calodo</p>
+      </div>
+
+      <div class="ol-info">
+        <p class="body-md reveal">
+          Kompetisi olahraga sudah bergulir sejak hari-hari sebelum pesta panen.
+          Ketika hari pesta tiba, yang digelar adalah babak final — pertandingan
+          paling menentukan yang ditunggu-tunggu seluruh warga.
+        </p>
+
+        <div class="sport-list">
+          {sports.map((s) => (
+            <div class="sport-row reveal">
+              <span class="sport-num">{s.num}</span>
+              <div class="sport-detail">
+                <h3 class="sport-title">{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="award-box reveal">
+          <div class="award-bar"></div>
+          <div class="award-body">
+            <h3 class="award-title">Penerimaan Hadiah</h3>
+            <p>Di malam harinya, seluruh rangkaian pesta panen ditutup dengan upacara penyerahan
+            penghargaan kepada para juara kedua cabang olahraga — momen yang menghangatkan
+            seluruh masyarakat Calodo Cenrana.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.ol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.ol-media { position: sticky; top: 100px; }
+.img-wrap {
+  border-radius: 3px;
+  overflow: hidden;
+}
+.img-wrap img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: brightness(0.97) contrast(1.03);
+  transition: transform 0.7s ease;
+  display: block;
+}
+.ol-media:hover .img-wrap img { transform: scale(1.03); }
+.img-cap {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 0.85rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);
+  font-style: italic;
+}
+.ol-info { display: flex; flex-direction: column; gap: 2.5rem; }
+
+.sport-list {
+  border-top: 1px solid rgba(28,23,18,0.1);
+  display: flex;
+  flex-direction: column;
+}
+.sport-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid rgba(28,23,18,0.08);
+  transition: padding-left 0.3s;
+}
+.sport-row:hover { padding-left: 0.5rem; }
+.sport-num {
+  font-family: var(--ff-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: rgba(28,23,18,0.1);
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color 0.3s;
+}
+.sport-row:hover .sport-num { color: var(--gold); }
+.sport-title {
+  font-family: var(--ff-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.sport-detail p { font-size: 0.88rem; line-height: 1.7; color: var(--ink-3); }
+
+.award-box {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.8rem;
+  background: var(--cream-2);
+  border: 1px solid rgba(201,151,74,0.18);
+  border-radius: 3px;
+}
+.award-bar {
+  width: 3px;
+  align-self: stretch;
+  background: var(--gold);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.award-title {
+  font-family: var(--ff-serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.award-body p { font-size: 0.88rem; line-height: 1.7; color: var(--ink-3); }
+
+@media (max-width: 960px) {
+  .ol-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .ol-media { position: static; }
+}
+</style>

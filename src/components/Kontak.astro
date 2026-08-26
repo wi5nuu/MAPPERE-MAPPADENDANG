@@ -1,0 +1,72 @@
+<section id="kontak" class="section kontak-section">
+  <div class="container kontak-grid">
+    <div class="kontak-info reveal">
+      <p class="section-kicker">Informasi &amp; Partisipasi</p>
+      <h2>Hubungi Panitia Festival</h2>
+      <p class="section-desc">
+        Ingin berpartisipasi, membuka stan, atau membutuhkan informasi lebih lanjut?
+        Hubungi panitia Pesta Panen Calodo melalui kanal berikut.
+      </p>
+
+      <ul class="kontak-list">
+        <li>
+          <strong>Sekretariat</strong>
+          <span>Kantor Desa, Calodo, Kec. Cenrana, Kab. Bone, Sulawesi Selatan 92754</span>
+        </li>
+        <li>
+          <strong>Jam Layanan</strong>
+          <span>Senin &ndash; Sabtu, 08.00 &ndash; 15.00 WIB</span>
+        </li>
+        <li>
+          <strong>Pendaftaran Stan UMKM</strong>
+          <span>Guna layanan pesan di samping ini dengan subjek &ldquo;Stan UMKM&rdquo;</span>
+        </li>
+      </ul>
+    </div>
+
+    <form class="kontak-form reveal" id="form-kontak" novalidate>
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" name="nama" placeholder="Nama Anda" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email / No. WhatsApp</label>
+        <input type="text" id="email" name="email" placeholder="nama@email.com / 08xx-xxxx-xxxx" required />
+      </div>
+      <div class="form-group">
+        <label for="pesan">Pesan</label>
+        <textarea id="pesan" name="pesan" rows="5" placeholder="Tulis pertanyaan atau pendaftaran Anda..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full">Kirim Pesan</button>
+      <p class="form-status" id="form-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('form-kontak') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const fields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea');
+    let valid = true;
+
+    fields.forEach((field) => {
+      field.classList.toggle('invalid', !field.checkValidity());
+      if (!field.checkValidity()) valid = false;
+    });
+
+    if (!valid) {
+      status.textContent = 'Mohon lengkapi semua kolom dengan benar.';
+      status.className = 'form-status err';
+      return;
+    }
+
+    status.textContent = 'Terima kasih! Pesan Anda telah tercatat panitia (simulasi).';
+    status.className = 'form-status ok';
+    form.reset();
+  });
+</script>

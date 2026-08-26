@@ -1,0 +1,99 @@
+---
+const metrics = [
+  { num: '6',     unit: 'Jam',       label: 'Durasi Acara Penuh' },
+  { num: '±30',   unit: 'Meter',     label: 'Ketinggian Ayunan Mappere' },
+  { num: '7×',    unit: 'Putaran',   label: 'Setiap Sesi Mappere' },
+  { num: '3',     unit: 'Kegiatan',  label: "Mappadendang · Mappere' · Olahraga" },
+];
+---
+
+<section id="tentang" class="section">
+  <div class="container">
+    <div class="two-col">
+      <div class="col-left reveal">
+        <p class="eyebrow">Mengenal Tradisi</p>
+        <h2 class="section-h2">Pesta Panen<br /><em>Calodo Cenrana</em></h2>
+      </div>
+      <div class="col-right reveal">
+        <p class="body-lg">
+          Pesta Panen Calodo Cenrana adalah tradisi syukur tahunan yang berakar kuat
+          dalam kehidupan agraris masyarakat Bugis di Cenrana, Bone. Dikhususkan untuk
+          warga <strong>Calodo, Cenrana</strong> —
+          pesta ini merayakan berkah dari sawah dan kebun yang telah memberikan kehidupan.
+        </p>
+        <p class="body-md">
+          Dari pagi hingga sore, masyarakat berkumpul dalam satu lapangan terbuka untuk
+          menjalankan tiga rangkaian kegiatan utama: ritual penumbukan gabah berirama dalam
+          <em>Mappadendang</em>, atraksi ayunan raksasa <em>Mappere</em>, dan babak final
+          pertandingan olahraga yang telah dipersiapkan jauh sebelum hari pesta.
+        </p>
+      </div>
+    </div>
+
+    <div class="metric-row">
+      {metrics.map((m) => (
+        <div class="metric-item reveal">
+          <span class="metric-num">{m.num}</span>
+          <span class="metric-unit">{m.unit}</span>
+          <span class="metric-label">{m.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 5rem;
+}
+.col-left .section-h2 { margin-bottom: 0; }
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(28,23,18,0.12);
+  border-left: 1px solid rgba(28,23,18,0.12);
+}
+.metric-item {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(28,23,18,0.12);
+  border-bottom: 1px solid rgba(28,23,18,0.12);
+  transition: background 0.3s;
+}
+.metric-item:hover { background: var(--cream-2); }
+.metric-num {
+  display: block;
+  font-family: var(--ff-serif);
+  font-size: clamp(2.5rem,4vw,3.5rem);
+  font-weight: 700;
+  color: var(--gold-dk);
+  line-height: 1;
+  margin-bottom: 0.1rem;
+}
+.metric-unit {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
+}
+.metric-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-3);
+  line-height: 1.45;
+}
+@media (max-width: 960px) {
+  .two-col { grid-template-columns: 1fr; gap: 2rem; }
+  .metric-row { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .metric-row { grid-template-columns: 1fr 1fr; }
+  .metric-item { padding: 1.5rem 1rem; }
+}
+</style>

@@ -1,0 +1,43 @@
+---
+const rows = [
+  { label: 'Nama Acara', value: 'Pesta Panen Mappere dan Mappadendang' },
+  { label: 'Hari / Tanggal', value: 'Akan diumumkan panitia (musim panen 2026)' },
+  { label: 'Waktu', value: '08.00 WIB &ndash; selesai' },
+  { label: 'Lokasi', value: 'Calodo, Kecamatan Cenrana, Kabupaten Bone' },
+  { label: 'Provinsi', value: 'Sulawesi Selatan' },
+  { label: 'Kode Pos Area', value: '92754' },
+  { label: 'Tiket', value: 'Gratis untuk seluruh masyarakat' },
+  {
+    label: 'Penyelenggara',
+    value: 'Pemerintah Desa &amp; Panitia Pesta Panen Calodo',
+  },
+];
+---
+
+<section id="info-acara" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker">Informasi Penting</p>
+      <h2>Info Acara &amp; Lokasi</h2>
+      <p class="section-desc">
+        Catat informasi berikut agar Anda tidak ketinggalan momen istimewa pesta panen di Calodo.
+      </p>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table class="data-table">
+        <caption>Rincian Pelaksanaan Festival</caption>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td set:html={row.value} />
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

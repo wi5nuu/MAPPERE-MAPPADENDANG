@@ -1,0 +1,62 @@
+---
+const agenda = [
+  {
+    time: '08.00 WIB',
+    title: 'Pembukaan & Sambutan',
+    text: 'Kirab pawai hasil panen, pembacaan doa oleh tetua adat, dan sambutan penyelenggara.',
+  },
+  {
+    time: '09.00 WIB',
+    title: 'Prosesi Adat Mappere',
+    text: 'Penyuguhan hasil panen terbaik dari warga secara khidmat sebagai lambang syukur kepada alam.',
+  },
+  {
+    time: '10.00 WIB',
+    title: 'Mappadendang Bersama',
+    text: 'Klimaks festival: menumbuk gabah di lesung dengan alu\' dalam irama bersama, disertai nyanyian tradisional.',
+  },
+  {
+    time: '13.00 WIB',
+    title: 'Pagelaran Seni Budaya',
+    text: 'Tari dan lagu tradisional Bugis, termasuk pertunjukan seni yang mengangkat kisah para petani.',
+  },
+  {
+    time: '15.00 WIB',
+    title: 'Lomba Rakyat & Kuliner UMKM',
+    text: 'Berbagai lomba seru antarwarga serta stan kuliner olahan padi dan produk lokal Calodo.',
+  },
+  {
+    time: '17.00 WIB',
+    title: 'Doa Syukur & Penutup',
+    text: 'Doa bersama atas keberkahan panen dan penutupan resmi rangkaian festival.',
+  },
+];
+---
+
+<section id="agenda" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker">Jadwal Kegiatan</p>
+      <h2>Rangkaian Agenda Acara</h2>
+      <p class="section-desc">
+        Satu hari penuh tradisi, seni, dan kebersamaan. Berikut alur besar acara
+        (waktu dapat berubah sesuai keputusan panitia).
+      </p>
+    </div>
+
+    <ol class="timeline">
+      {
+        agenda.map((item, i) => (
+          <li class="timeline-item reveal">
+            <span class="timeline-num">{String(i + 1).padStart(2, '0')}</span>
+            <div class="timeline-body">
+              <time>{item.time}</time>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

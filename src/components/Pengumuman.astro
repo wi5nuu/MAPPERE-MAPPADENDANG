@@ -1,0 +1,43 @@
+---
+const posts = [
+  {
+    date: '2026-08-20',
+    dateLabel: '20 Agustus 2026',
+    title: 'Panitia Resmi Dibentuk untuk Pesta Panen 2026',
+    text: 'Rapat warga menyepakati pembentukan panitia Pesta Panen Mappere dan Mappadendang beserta pembagian tugas tiap bidang.',
+  },
+  {
+    date: '2026-08-10',
+    dateLabel: '10 Agustus 2026',
+    title: 'Gladi Bersih Prosesi Mappadendang',
+    text: 'Para perempuan perajurit alu\' mulai berlatih irama penumbukan padi agar prosesi inti berjalan merdu dan kompak.',
+  },
+  {
+    date: '2026-08-01',
+    dateLabel: '1 Agustus 2026',
+    title: 'Pendaftaran Stan Kuliner & UMKM Dibuka',
+    text: 'Warga yang ingin membuka stan kuliner atau menampilkan produk lokal dapat mendaftar ke sekretariat panitia.',
+  },
+];
+---
+
+<section id="pengumuman" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker">Kabar Terkini</p>
+      <h2>Pengumuman Panitia</h2>
+    </div>
+
+    <div class="berita-grid">
+      {
+        posts.map((post) => (
+          <article class="berita-card reveal">
+            <time datetime={post.date}>{post.dateLabel}</time>
+            <h3>{post.title}</h3>
+            <p>{post.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,163 @@
+---
+const details = [
+  { key: 'Bentuk Lesung',     val: 'Kotak persegi panjang (bukan melengkung)' },
+  { key: 'Pemukul Padi',      val: '4 perempuan wajib Baju Bodo Bugis' },
+  { key: 'Pemukul Kayu',      val: '3 pria di ujung belakang (formasi segitiga)' },
+  { key: 'Hiasan Alu',        val: 'Kain/plastik biru di bagian atas alu' },
+  { key: 'Durasi per Sesi',   val: '±30 menit' },
+  { key: 'Isi Lesung',        val: 'Gabah, bunga, kain berwarna-warni, dedaunan' },
+];
+---
+
+<section id="mappadendang" class="section">
+  <div class="container">
+    <div class="sec-intro reveal">
+      <p class="eyebrow">Kegiatan Pertama · 09.00 – 12.00</p>
+      <h2 class="section-h2"><em>Mappadendang</em></h2>
+      <p class="section-sub">Penumbukan gabah berirama sebagai ritual syukur atas keberhasilan panen</p>
+    </div>
+
+    <div class="mtx-grid">
+      <!-- Sticky image -->
+      <div class="mtx-media reveal">
+        <div class="img-wrap">
+          <img
+            src="/img/mappadendang.jpg"
+            alt="Mappadendang Calodo — lesung kayu berbentuk kotak persegi panjang berisi gabah, bunga, kain warna-warni; alu berhias biru dipukul berselang-seling oleh 6 perempuan berbaju bodo; 3 pria formasi segitiga di belakang; sawah padi latar belakang"
+            loading="lazy"
+          />
+        </div>
+        <p class="img-cap">
+          Satu lesung kotak panjang di tengah. <strong>4 perempuan baju bodo</strong> berdiri
+          2 di kiri &amp; 2 di kanan, saling berhadapan memukul padi ke dalam lesung.
+          <strong>3 pria peci hitam</strong> di ujung belakang memukul bagian kayu lesungnya.
+        </p>
+      </div>
+
+      <!-- Text -->
+      <div class="mtx-text">
+        <div class="seg reveal">
+        <h3 class="seg-title">Lesung Berbentuk Kotak</h3>
+          <p>Lesung dalam Mappadendang Calodo berbentuk <strong>persegi panjang seperti peti
+          atau bak kayu</strong> — dindingnya lurus dan rata, bukan melengkung. Terbuat dari
+          kayu tebal yang dipahat, lesungnya cukup panjang dan dalam untuk menampung isian
+          ritual. Di dalamnya diisi dengan gabah, bunga-bunga segar, kain berwarna-warni,
+          dan beberapa helai dedaunan sebagai simbol kesuburan dan rasa syukur kepada
+          Yang Maha Kuasa.</p>
+        </div>
+
+        <div class="seg reveal">
+          <h3 class="seg-title">Formasi Pemain</h3>
+          <p><strong>4 perempuan wajib mengenakan baju bodo Bugis</strong> tradisional lengkap
+          dengan perhiasan emas. Mereka berdiri dalam <strong>2 pasang saling berhadapan</strong>
+          — lesung berada di tengah-tengah mereka. Pasangan pertama memukul bagian kepala
+          hingga tengah lesung, pasangan kedua memukul bagian tengah. Masing-masing pasangan
+          memukul <em>satu bagian lesung yang sama</em>, berselang-seling sehingga bunyinya
+          menyatu rapi.</p>
+          <p style="margin-top:0.7rem"><strong>3 pria di ujung belakang</strong> membentuk
+          formasi segitiga dan memiliki peran berbeda: mereka <strong>tidak memukul padi</strong>,
+          melainkan memukul <strong>bagian kayu lesung</strong> — sisi dan ujung kayunya —
+          untuk menciptakan variasi bunyi yang khas. Satu pria menghadap ke depan (penonton)
+          memegang tongkat pendek dengan kedua tangan; dua pria lainnya saling berhadapan
+          di kanan-kiri ujung lesung memukul bergantian.
+          </p>
+        </div>
+
+        <div class="seg reveal">
+          <h3 class="seg-title">Irama &amp; Tempo</h3>
+          <p>Orang di sisi kiri memainkan pola dua ketukan, sementara sisi kanan memainkan
+          tiga ketukan. Keduanya berselang-seling menciptakan melodi perkusi yang kaya.
+          Satu sesi berlangsung sekitar 30 menit, menghasilkan suara tumbukan yang enak
+          didengar dan terasa khas oleh seluruh masyarakat yang hadir.</p>
+        </div>
+
+        <div class="detail-list reveal">
+          {details.map((d) => (
+            <div class="detail-row">
+              <span class="detail-key">{d.key}</span>
+              <span class="detail-val">{d.val}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.sec-intro { margin-bottom: 4rem; }
+
+.mtx-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.mtx-media { position: sticky; top: 100px; }
+.img-wrap {
+  border-radius: 3px;
+  overflow: hidden;
+}
+.img-wrap img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  filter: brightness(0.97) contrast(1.03);
+  transition: transform 0.7s ease, filter 0.7s;
+  display: block;
+}
+.mtx-media:hover .img-wrap img {
+  transform: scale(1.03);
+  filter: brightness(1) contrast(1.05);
+}
+.img-cap {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 0.85rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--gold);
+  font-style: italic;
+}
+.mtx-text { display: flex; flex-direction: column; gap: 2.2rem; }
+
+.seg-title {
+  font-family: var(--ff-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+.seg p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--ink-3);
+}
+
+.detail-list { border-top: 1px solid rgba(28,23,18,0.1); }
+.detail-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(28,23,18,0.07);
+}
+.detail-key {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.detail-val {
+  font-size: 0.9rem;
+  color: var(--ink);
+  text-align: right;
+}
+@media (max-width: 960px) {
+  .mtx-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .mtx-media { position: static; }
+}
+</style>

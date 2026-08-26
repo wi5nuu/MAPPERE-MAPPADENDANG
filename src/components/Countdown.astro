@@ -1,0 +1,70 @@
+---
+const target = '2026-10-24T08:00:00+07:00';
+---
+
+<section class="countdown-band" id="countdown" data-target={target}>
+  <div class="container countdown-inner">
+    <div class="countdown-label">
+      <span class="section-kicker section-kicker-light">Hitung Mundur Acara</span>
+      <p>Sampai hari H Pesta Panen Mappere dan Mappadendang</p>
+    </div>
+    <div class="countdown-grid" role="timer" aria-live="polite">
+      <div class="countdown-cell">
+        <strong id="cd-hari">--</strong>
+        <span>Hari</span>
+      </div>
+      <div class="countdown-cell">
+        <strong id="cd-jam">--</strong>
+        <span>Jam</span>
+      </div>
+      <div class="countdown-cell">
+        <strong id="cd-menit">--</strong>
+        <span>Menit</span>
+      </div>
+      <div class="countdown-cell">
+        <strong id="cd-detik">--</strong>
+        <span>Detik</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const band = document.getElementById('countdown');
+  const targetTime = band ? new Date(band.dataset.target ?? '').getTime() : NaN;
+
+  const el = {
+    hari: document.getElementById('cd-hari'),
+    jam: document.getElementById('cd-jam'),
+    menit: document.getElementById('cd-menit'),
+    detik: document.getElementById('cd-detik'),
+  };
+
+  function pad(n: number) {
+    return String(n).padStart(2, '0');
+  }
+
+  function tick() {
+    if (!Number.isFinite(targetTime)) return;
+    const diff = targetTime - Date.now();
+
+    if (diff <= 0) {
+      if (el.hari && el.jam && el.menit && el.detik) {
+        el.hari.textContent = '00';
+        el.jam.textContent = '00';
+        el.menit.textContent = '00';
+        el.detik.textContent = '00';
+      }
+      return;
+    }
+
+    const s = Math.floor(diff / 1000);
+    if (el.hari) el.hari.textContent = pad(Math.floor(s / 86400));
+    if (el.jam) el.jam.textContent = pad(Math.floor((s % 86400) / 3600));
+    if (el.menit) el.menit.textContent = pad(Math.floor((s % 3600) / 60));
+    if (el.detik) el.detik.textContent = pad(s % 60);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>

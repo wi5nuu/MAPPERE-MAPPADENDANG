@@ -1,0 +1,48 @@
+---
+const photos = [
+  {
+    src: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=900&q=60',
+    alt: 'Hamparan sawah saat matahari terbenam',
+    caption: 'Senja di sawah Calodo',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1464226184884-89e111bd90df?auto=format&fit=crop&w=900&q=60',
+    alt: 'Petani memeriksa tanaman padi',
+    caption: 'Kesibukan menjelang panen',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=60',
+    alt: 'Hasil bumi segar di lapak',
+    caption: 'Hasil bumi warga',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=900&q=60',
+    alt: 'Suasana kebersamaan masyarakat desa',
+    caption: 'Kebersamaan warga',
+  },
+];
+---
+
+<section id="galeri" class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-kicker">Galeri</p>
+      <h2>Suasana Desa &amp; Panen</h2>
+      <p class="section-desc">
+        Sekilas suasana pertanian dan kehidupan masyarakat Calodo. Dokumentasi festival
+        akan ditambahkan setelah acara berlangsung.
+      </p>
+    </div>
+
+    <div class="galeri-grid">
+      {
+        photos.map((photo) => (
+          <figure class="galeri-item reveal">
+            <img src={photo.src} alt={photo.alt} loading="lazy" width="600" height="400" />
+            <figcaption>{photo.caption}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
