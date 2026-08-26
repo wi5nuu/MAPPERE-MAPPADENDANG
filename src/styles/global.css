@@ -171,7 +171,29 @@ button { font-family: inherit; }
 }
 
 /* ---- Responsive images ---- */
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: none; }
-  html    { scroll-behavior: auto; }
+/* ---- Print Styles (for cultural archiving & PDF export) ---- */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+  }
+  #navbar, #music-player, #mpHint, #btt, .hero-scroll-ind, #particleCanvas {
+    display: none !important;
+  }
+  .section {
+    padding: 2rem 0 !important;
+    page-break-inside: avoid;
+  }
+  .bg-dark, .bg-charcoal {
+    background: #f8f8f8 !important;
+    color: #111 !important;
+  }
+  .section-h2, .section-h2.light {
+    color: #000 !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
