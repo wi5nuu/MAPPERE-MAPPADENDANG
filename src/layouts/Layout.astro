@@ -1,41 +1,64 @@
 ---
 import '../styles/global.css';
+import interWght from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import cg400 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2?url';
+import cg600 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2?url';
+import cg700 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-700-normal.woff2?url';
+import cg400i from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-italic.woff2?url';
+import cg600i from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2?url';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
-  url?: string;
+  imageAlt?: string;
+  path?: string;
+  noindex?: boolean;
 }
 
 const siteUrl = 'https://labongnge.aksesdesa.id';
 
 const {
-  title = 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana — Tradisi Bugis Bone Sulawesi Selatan',
-  description = 'Website resmi Pesta Panen Mappere dan Mappadendang di Calodo, Kecamatan Cenrana, Kabupaten Bone, Sulawesi Selatan. Tradisi syukur tahunan masyarakat Bugis — ayunan raksasa Mappere, penumbukan gabah Mappadendang, Tapparareng, dan olahraga tradisional.',
-  image = `${siteUrl}/img/mappadendang.jpg`,
-  url = siteUrl,
+  title = 'Pesta Panen Mappere & Mappadendang Calodo Cenrana 2026 | Bone, Sulsel',
+  description = 'Pesta Panen Calodo, Cenrana, Bone, Sabtu 24 Oktober 2026: Mappadendang, ayunan raksasa Mappere\', Tappareng, final olahraga, serta hasil bumi padi, ikan & kebun.',
+  image = `${siteUrl}/og-image.jpg`,
+  imageAlt = 'Mappadendang di Calodo Cenrana: perempuan berbaju bodo menumbuk gabah di lesung kayu saat Pesta Panen',
+  path = '/',
+  noindex = false,
 } = Astro.props;
+
+const url = new URL(path, siteUrl).href;
+
+const fontCss = `
+@font-face{font-family:'Inter';font-style:normal;font-display:swap;font-weight:100 900;src:url(${interWght}) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-display:swap;font-weight:400;src:url(${cg400}) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-display:swap;font-weight:600;src:url(${cg600}) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-display:swap;font-weight:700;src:url(${cg700}) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-display:swap;font-weight:400;src:url(${cg400i}) format('woff2')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-display:swap;font-weight:600;src:url(${cg600i}) format('woff2')}
+`;
 
 const keywords = [
   'Pesta Panen Calodo',
+  'Pesta Panen Calodo 2026',
   'Mappere Calodo',
   'Mappadendang Calodo',
   'Pesta Panen Cenrana',
+  'Tappareng Calodo',
+  'Tappareng Cenrana',
   'tradisi Bugis Bone',
-  'Calodo Cenrana',
-  'Mappere Bugis',
-  'Mappadendang Bugis',
-  'Tapparareng Calodo',
+  'Calodo Cenrana Bone',
+  'hasil bumi Calodo',
   'festival budaya Bone',
-  'budaya Sulawesi Selatan',
-  'adat Bugis Bone',
-  'pesta panen Sulsel',
-  'Cenrana Bone',
-  'tradisi Bone Sulawesi Selatan',
+  'pesta panen Sulawesi Selatan',
   'ayunan raksasa Bugis',
   'lesung Bugis',
 ].join(', ');
+
+const festivalId = `${siteUrl}/#festival`;
+const placeId = `${siteUrl}/#calodo`;
+const orgId = `${siteUrl}/#masyarakat-calodo`;
+const day = '2026-10-24';
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -43,63 +66,108 @@ const jsonLd = {
     {
       '@type': 'WebSite',
       '@id': `${siteUrl}/#website`,
-      url: siteUrl,
-      name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
-      description: description,
+      url: `${siteUrl}/`,
+      name: 'Pesta Panen Mappere & Mappadendang Calodo Cenrana',
+      alternateName: ['Pesta Panen Calodo', 'Labongnge'],
+      description,
       inLanguage: 'id-ID',
-      creator: {
-        '@type': 'Person',
-        name: 'Wisnu Alfian Nur Ashar',
+      publisher: { '@id': orgId },
+      creator: { '@type': 'Person', name: 'Wisnu Alfian Nur Ashar', url: 'https://github.com/wi5nuu' },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description,
+      inLanguage: 'id-ID',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: { '@id': festivalId },
+      primaryImageOfPage: { '@id': `${siteUrl}/#primaryimage` },
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+    },
+    {
+      '@type': 'ImageObject',
+      '@id': `${siteUrl}/#primaryimage`,
+      url: image,
+      contentUrl: image,
+      width: 1200,
+      height: 630,
+      caption: imageAlt,
+    },
+    {
+      '@type': 'Organization',
+      '@id': orgId,
+      name: 'Masyarakat Calodo Cenrana',
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/icon-512.png`,
+      areaServed: { '@id': placeId },
+    },
+    {
+      '@type': 'Place',
+      '@id': placeId,
+      name: 'Calodo, Kecamatan Cenrana, Kabupaten Bone',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Calodo, Kecamatan Cenrana',
+        addressRegion: 'Sulawesi Selatan',
+        addressCountry: 'ID',
+      },
+      geo: { '@type': 'GeoCoordinates', latitude: -4.4, longitude: 120.3 },
+      containsPlace: {
+        '@type': 'LandmarksOrHistoricalBuildings',
+        name: 'Tappareng Calodo',
+        description:
+          'Hamparan sawah di tepi sungai yang berubah menjadi danau dangkal saat musim hujan dan kembali menjadi sawah padi saat musim kering; tempat warga mencari ikan.',
       },
     },
     {
       '@type': 'Festival',
-      '@id': `${siteUrl}/#festival`,
-      name: 'Pesta Panen Mappere dan Mappadendang Calodo Cenrana',
-      description: description,
-      url: siteUrl,
-      location: {
-        '@type': 'Place',
-        name: 'Calodo, Cenrana, Bone, Sulawesi Selatan',
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Cenrana',
-          addressRegion: 'Bone',
-          addressCountry: 'ID',
-        },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: '-4.4',
-          longitude: '120.3',
-        },
-      },
-      organizer: {
-        '@type': 'Organization',
-        name: 'Masyarakat Calodo Cenrana',
-      },
-      eventSchedule: {
-        '@type': 'Schedule',
-        repeatFrequency: 'P1Y',
-        startTime: '09:00',
-        endTime: '21:00',
-      },
-      image: image,
-      inLanguage: 'id',
+      '@id': festivalId,
+      name: 'Pesta Panen Mappere & Mappadendang Calodo Cenrana 2026',
+      description,
+      url: `${siteUrl}/`,
+      image: [image],
+      startDate: `${day}T09:00:00+08:00`,
+      endDate: `${day}T21:00:00+08:00`,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       isAccessibleForFree: true,
+      inLanguage: 'id',
+      location: { '@id': placeId },
+      organizer: { '@id': orgId },
+      performer: { '@id': orgId },
+      offers: {
+        '@type': 'Offer',
+        price: 0,
+        priceCurrency: 'IDR',
+        availability: 'https://schema.org/InStock',
+        url: `${siteUrl}/#rundown`,
+        validFrom: '2026-10-01T00:00:00+08:00',
+      },
+      subEvent: [
+        { name: 'Mappadendang: penumbukan gabah berirama', start: '09:00', end: '12:00', anchor: 'mappadendang' },
+        { name: "Mappere': ayunan raksasa", start: '13:00', anchor: 'mappere' },
+        { name: 'Final Voli Putra & Sepak Takraw Putra', start: '14:00', anchor: 'olahraga' },
+      ].map((e) => ({
+        '@type': 'Event',
+        name: e.name,
+        startDate: `${day}T${e.start}:00+08:00`,
+        ...(e.end && { endDate: `${day}T${e.end}:00+08:00` }),
+        url: `${siteUrl}/#${e.anchor}`,
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: { '@id': placeId },
+        organizer: { '@id': orgId },
+        superEvent: { '@id': festivalId },
+      })),
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': `${siteUrl}/#breadcrumb`,
-      itemListElement: [
-        {
-          '@type': 'ListItem',
-          position: 1,
-          name: 'Beranda',
-          item: siteUrl,
-        }
-      ],
-    }
-  ]
+      '@id': `${url}#breadcrumb`,
+      itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Beranda', item: `${siteUrl}/` }],
+    },
+  ],
 };
 ---
 
@@ -107,65 +175,65 @@ const jsonLd = {
 <html lang="id" prefix="og: https://ogp.me/ns#">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <!-- ═══ Fonts: self-hosted, latin only, preloaded ═══ -->
+    <link rel="preload" href={interWght} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cg700} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontCss} />
 
     <!-- ═══ Primary SEO ═══ -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Wisnu Alfian Nur Ashar" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="google-site-verification" content="googlebc49b8f4b329ba9b" />
-    <link rel="canonical" href={url} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+    {!noindex && <link rel="canonical" href={url} />}
+    {!noindex && <link rel="alternate" hreflang="id" href={url} />}
+    {!noindex && <link rel="alternate" hreflang="x-default" href={url} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <!-- ═══ Open Graph / Facebook ═══ -->
+    <!-- ═══ Open Graph / Facebook / WhatsApp ═══ -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:secure_url" content={image} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Pesta Panen Mappere dan Mappadendang Calodo Cenrana" />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:locale" content="id_ID" />
-    <meta property="og:locale:alternate" content="id_ID" />
     <meta property="og:site_name" content="Pesta Panen Calodo Cenrana" />
 
-    <!-- ═══ Twitter Card ═══ -->
+    <!-- ═══ Twitter / X Card ═══ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
 
     <!-- ═══ Geo & Regional Search SEO (Sulawesi Selatan, Bone, Cenrana, Calodo) ═══ -->
     <meta name="geo.region" content="ID-SN" />
     <meta name="geo.placename" content="Calodo, Cenrana, Bone, Sulawesi Selatan" />
     <meta name="geo.position" content="-4.4000;120.3000" />
     <meta name="ICBM" content="-4.4000, 120.3000" />
-    <meta name="DC.title" content="Pesta Panen Mappere dan Mappadendang Calodo Cenrana Bone" />
-    <meta name="DC.creator" content="Masyarakat Adat Calodo Cenrana" />
-    <meta name="DC.language" content="id" />
-    <meta name="DC.coverage" content="Sulawesi Selatan, Indonesia" />
 
     <!-- ═══ Technical ═══ -->
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#100E0B" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="color-scheme" content="light" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Pesta Panen Calodo" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- ═══ Fonts — preconnect first, then load ═══ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- ═══ Preload hero image for LCP ═══ -->
-    <link rel="preload" as="image" href="/img/mappadendang.jpg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- ═══ JSON-LD Structured Data ═══ -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -177,24 +245,22 @@ const jsonLd = {
     <script>
       /* Global reveal observer */
       const revealEls = document.querySelectorAll('.reveal');
-      const revealIO  = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        revealEls.forEach((el) => el.classList.add('visible'));
+      } else {
+        const revealIO = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
             const siblings = [...(e.target.parentElement?.children ?? [])].filter(
               (c) => c.classList.contains('reveal')
             );
-            const idx = siblings.indexOf(e.target as Element);
-            setTimeout(() => (e.target as HTMLElement).classList.add('visible'), idx * 80);
+            const idx = Math.min(siblings.indexOf(e.target as Element), 4);
+            setTimeout(() => e.target.classList.add('visible'), idx * 80);
             revealIO.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      revealEls.forEach((el) => revealIO.observe(el));
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach((el) => revealIO.observe(el));
+      }
     </script>
   </body>
 </html>
-
-
-
-
-

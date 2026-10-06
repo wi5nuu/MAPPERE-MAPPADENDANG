@@ -9,8 +9,10 @@
   </svg>
 </div>
 <div id="music-player" class="mp" aria-label="Pemutar musik latar" role="region">
-  <audio id="bgAudio" loop preload="auto" playsinline webkit-playsinline>
-    <source src="/audio/bugis_tana_ogi_wanuakku.mp3" type="audio/mpeg" />
+  <!-- preload="none": the song (2.4 MB) is only downloaded once playback starts -->
+  <audio id="bgAudio" loop preload="none" playsinline webkit-playsinline>
+    <source src="/audio/tana-ogi-wanuakku.webm" type="audio/webm; codecs=opus" />
+    <source src="/audio/tana-ogi-wanuakku.mp3" type="audio/mpeg" />
   </audio>
 
   <button id="mpBtn" class="mp-btn" aria-label="Putar / Jeda musik" title="Tana Ogi Wanuakku — Lagu Bugis">
@@ -225,7 +227,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.6);
 }
 
 /* Volume */
@@ -233,7 +235,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.6);
   flex-shrink: 0;
 }
 #volSlider {
