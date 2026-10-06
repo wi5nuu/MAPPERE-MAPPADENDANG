@@ -5,13 +5,13 @@ export default defineConfig({
   site: 'https://labongnge.aksesdesa.id',
   integrations: [
     sitemap({
-      changefreq: 'monthly',
+      changefreq: 'weekly',
       priority: 1.0,
       lastmod: new Date(),
     }),
   ],
   build: {
-    inlineStylesheets: 'auto',
+    inlineStylesheets: 'always',
   },
   compressHTML: true,
   vite: {

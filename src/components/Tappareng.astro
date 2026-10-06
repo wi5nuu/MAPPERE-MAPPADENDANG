@@ -1,17 +1,19 @@
 ---
+import { Picture } from 'astro:assets';
+import tapparengImg from '../assets/img/tappareng.jpg';
 const seasons = [
   {
     icon: '🌧',
     season: 'Musim Hujan',
     title: 'Berubah Menjadi Danau',
-    desc: 'Ketika curah hujan tinggi dan sungai meluap, Tapparareng berubah menjadi hamparan danau dangkal yang luas. Warga menggunakan perahu tradisional dan mottoro tassi (perahu motor) untuk beraktivitas — termasuk mengangkut karung-karung padi hasil panen ke darat.',
-    color: '#3a7bd5',
+    desc: 'Ketika curah hujan tinggi dan sungai meluap, Tappareng berubah menjadi hamparan danau dangkal yang luas. Warga menggunakan perahu tradisional dan mottoro tassi (perahu motor) untuk beraktivitas — termasuk mengangkut karung-karung padi hasil panen ke darat.',
+    color: '#7fb3f5',
   },
   {
     icon: '☀',
     season: 'Musim Kering',
     title: 'Menjadi Sawah Subur',
-    desc: 'Ketika air surut dan Tapparareng mengering, tanahnya yang subur siap ditanami padi. Hamparan sawah hijau yang baru tertanam menjadi pemandangan yang menawan — inilah sumber panen yang dirayakan setiap tahun dalam Pesta Panen Calodo.',
+    desc: 'Ketika air surut dan Tappareng mengering, tanahnya yang subur siap ditanami padi. Hamparan sawah hijau yang baru tertanam menjadi pemandangan yang menawan — inilah sumber panen yang dirayakan setiap tahun dalam Pesta Panen Calodo.',
     color: '#d4a017',
   },
 ];
@@ -29,23 +31,25 @@ const fish = [
 ];
 ---
 
-<section id="tapparareng" class="section bg-charcoal">
+<section id="tappareng" class="section bg-charcoal">
   <div class="container">
     <div class="tpr-grid">
       <!-- Sticky image -->
       <div class="tpr-media reveal">
         <div class="img-wrap-dark">
-          <img
-            src="/img/tapparareng.jpg"
-            alt="Tapparareng Calodo Cenrana — hamparan sawah yang berubah menjadi danau saat musim hujan, perahu tradisional mengangkut padi, rumah-rumah Bugis di tepi air, dikelilingi hutan tropis Sulawesi"
-            width="1200"
-            height="675"
+          <Picture
+            src={tapparengImg}
+            alt="Tappareng Calodo Cenrana — hamparan sawah yang berubah menjadi danau saat musim hujan, perahu tradisional mengangkut padi, rumah-rumah Bugis di tepi air, dikelilingi hutan tropis Sulawesi"
+            widths={[480, 768, 1100]}
+            sizes="(max-width: 960px) 100vw, 560px"
+            formats={['webp']}
+            quality={72}
             loading="lazy"
             decoding="async"
           />
         </div>
         <p class="img-cap-lt">
-          Tapparareng saat musim hujan — sawah berubah menjadi danau luas. Perahu tradisional
+          Tappareng saat musim hujan — sawah berubah menjadi danau luas. Perahu tradisional
           dan mottoro tassi lalu-lalang mengangkut hasil panen. Saat kering, tanah ini
           kembali menjadi sawah subur yang siap ditanami padi.
         </p>
@@ -59,13 +63,13 @@ const fish = [
       <div class="tpr-text">
         <div class="reveal">
           <p class="eyebrow light">Keunikan Alam Calodo</p>
-          <h2 class="section-h2 light"><em>Tapparareng</em></h2>
+          <h2 class="section-h2 light"><em>Tappareng</em></h2>
           <p class="section-sub light">Lahan sawah unik yang berubah wajah mengikuti pergantian musim</p>
         </div>
 
         <div class="seg-lt reveal">
           <p class="p-lt">
-            Di Calodo terdapat wilayah yang dikenal sebagai <strong class="hl">Tapparareng</strong>
+            Di Calodo terdapat wilayah yang dikenal sebagai <strong class="hl">Tappareng</strong>
             — sebuah hamparan lahan pertanian yang memiliki sungai di sisinya. Keunikannya
             terletak pada perubahannya yang dramatis mengikuti musim: ketika musim hujan tiba
             dan sungai meluap, seluruh kawasan ini berubah wujud menjadi <strong class="hl">
@@ -93,7 +97,7 @@ const fish = [
             Salah satu pemandangan yang paling khas saat musim panen bertepatan dengan
             musim hujan adalah proses pengangkutan hasil panen. Karung-karung berisi padi
             yang telah dipanen dibawa menggunakan <strong class="hl">perahu tradisional</strong>
-            menyeberangi genangan Tapparareng menuju daratan. Ketika kondisi memungkinkan,
+            menyeberangi genangan Tappareng menuju daratan. Ketika kondisi memungkinkan,
             warga juga menggunakan <strong class="hl">mottoro tassi</strong> — perahu
             bermotor — untuk mempercepat proses pengangkutan. Inilah keunikan bertani
             di Calodo yang tidak ditemukan di tempat lain.
@@ -103,7 +107,7 @@ const fish = [
         <div class="seg-lt reveal">
           <h3 class="seg-title-lt">Surga Ikan Lokal</h3>
           <p class="p-lt">
-            Tapparareng bukan sekadar lahan pertanian — ia juga menjadi <strong class="hl">tempat
+            Tappareng bukan sekadar lahan pertanian — ia juga menjadi <strong class="hl">tempat
             mencari ikan</strong> bagi warga Calodo. Berbagai jenis ikan berkumpul di perairan
             dangkalnya yang kaya nutrisi, mulai dari ikan yang dikenal luas hingga
             jenis-jenis lokal Bugis yang hanya ditemukan di perairan seperti ini.
@@ -146,7 +150,7 @@ const fish = [
 .img-cap-lt {
   font-size: 0.78rem;
   line-height: 1.55;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.6);
   margin-top: 0.85rem;
   padding-left: 1rem;
   border-left: 2px solid rgba(201,151,74,0.4);
@@ -169,7 +173,7 @@ const fish = [
   font-family: var(--ff-serif);
   font-size: 1.05rem;
   font-style: italic;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.6);
   line-height: 1.55;
 }
 
@@ -186,7 +190,7 @@ const fish = [
 .p-lt {
   font-size: 0.95rem;
   line-height: 1.82;
-  color: rgba(255,255,255,0.52);
+  color: rgba(255,255,255,0.6);
 }
 .hl { color: var(--gold-lt); font-weight: 500; }
 
@@ -217,7 +221,6 @@ const fish = [
   padding: 0.18rem 0.6rem;
   border-radius: 2px;
   margin-bottom: 0.5rem;
-  opacity: 0.7;
 }
 .sc-title {
   font-family: var(--ff-serif);
@@ -226,7 +229,7 @@ const fish = [
   color: #fff;
   line-height: 1.2;
 }
-.sc-desc { font-size: 0.82rem; line-height: 1.65; color: rgba(255,255,255,0.4); }
+.sc-desc { font-size: 0.82rem; line-height: 1.65; color: rgba(255,255,255,0.6); }
 
 @media (max-width: 960px) {
   .tpr-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -264,7 +267,7 @@ const fish = [
 .fish-note {
   font-size: 0.62rem;
   letter-spacing: 0.08em;
-  color: rgba(255,255,255,0.28);
+  color: rgba(255,255,255,0.6);
   text-transform: uppercase;
   margin-top: 0.15rem;
 }

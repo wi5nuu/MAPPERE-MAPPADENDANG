@@ -7,7 +7,7 @@
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 ![Region](https://img.shields.io/badge/Region-Bone%20Sulawesi%20Selatan-blue)
 
-![Mappadendang Calodo](public/img/mappadendang.jpg)
+![Mappadendang Calodo](src/assets/img/mappadendang.jpg)
 
 ---
 
@@ -88,16 +88,16 @@ Malam harinya: **upacara penyerahan hadiah** sebagai penutup seluruh rangkaian p
 
 ---
 
-## 🌊 Tapparareng — Keajaiban Alam Calodo
+## 🌊 Tappareng — Keajaiban Alam Calodo
 
-Di Calodo terdapat kawasan unik yang disebut **Tapparareng**: lahan pertanian dengan sungai di sisinya yang berubah wajah mengikuti musim.
+Di Calodo terdapat kawasan unik yang disebut **Tappareng**: lahan pertanian dengan sungai di sisinya yang berubah wajah mengikuti musim.
 
 | Musim | Wujud | Aktivitas |
 |-------|-------|-----------|
 | **Hujan** | Danau luas 🌊 | Perahu tradisional & **mottoro tassi** mengangkut karung padi |
 | **Kering** | Sawah subur 🌾 | Menanam padi |
 
-**Ikan-ikan di Tapparareng:**
+**Ikan-ikan di Tappareng:**
 Ikan Mujair · Ikan Gabus · Belut · Bale Cambang · Bale Ceppe' · Bale Jahele · Bale Salo · Lenrong · Bale Kamboja
 
 ---
@@ -111,7 +111,7 @@ Website ini dibangun menggunakan:
 | [Astro v5](https://astro.build) | Framework web modern, cepat |
 | Vanilla CSS | Styling tanpa dependensi berlebihan |
 | TypeScript | Script interaktif (particle canvas, musik, dll) |
-| Cormorant Garamond + Inter | Tipografi editorial profesional |
+| Cormorant Garamond + Inter | Tipografi editorial, di-host sendiri (tanpa Google Fonts) |
 
 **Struktur proyek:**
 ```
@@ -120,24 +120,27 @@ src/
 │   ├── Navbar.astro          — Navigasi sticky + mobile
 │   ├── Hero.astro            — Canvas particles + parallax
 │   ├── Tentang.astro         — Tentang pesta panen + metrik
-│   ├── Tapparareng.astro     — Keajaiban alam Calodo
+│   ├── Tappareng.astro       — Keajaiban alam Calodo
+│   ├── HasilBumi.astro       — Padi, ikan & hasil kebun warga
 │   ├── Rundown.astro         — Timeline jadwal acara
 │   ├── Mappadendang.astro    — Ritual penumbukan gabah
 │   ├── Mappere.astro         — Ayunan raksasa
 │   ├── Olahraga.astro        — Final voli & sepak takraw
 │   ├── Footer.astro          — Footer
 │   └── MusicPlayer.astro     — Pemutar lagu Bugis
-├── layouts/Layout.astro      — HTML shell utama
-├── pages/index.astro         — Halaman utama
-└── styles/global.css         — Design tokens & utilities
-public/
-├── img/                      — Gambar ilustrasi
+├── assets/img/               — Foto sumber (dioptimasi otomatis ke WebP saat build)
 │   ├── mappadendang.jpg
 │   ├── mappere.jpg
 │   ├── olahraga.jpg
-│   └── tapparareng.jpg
+│   └── tappareng.jpg
+├── layouts/Layout.astro      — HTML shell utama + SEO & data terstruktur
+├── pages/index.astro         — Halaman utama
+└── styles/global.css         — Design tokens & utilities
+public/
+├── og-image.jpg              — Gambar pratinjau 1200×630 untuk WhatsApp/Facebook/X
 └── audio/
-    └── bugis_tana_ogi_wanuakku.mp3  — Lagu latar Bugis
+    ├── tana-ogi-wanuakku.webm  — Lagu latar Bugis (Opus, 2,4 MB)
+    └── tana-ogi-wanuakku.mp3   — Cadangan untuk browser lama
 ```
 
 ---

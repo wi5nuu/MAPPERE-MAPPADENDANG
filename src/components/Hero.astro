@@ -1,8 +1,22 @@
 ---
+import { Picture } from 'astro:assets';
+import heroImg from '../assets/img/mappadendang.jpg';
 ---
 
 <header id="hero" role="banner">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" id="heroBg">
+    <Picture
+      src={heroImg}
+      alt=""
+      widths={[640, 960, 1376]}
+      sizes="100vw"
+      formats={['webp']}
+      quality={50}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </div>
   <div class="hero-overlay"></div>
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
@@ -14,13 +28,13 @@
       <span class="tl tl-3 tl-thin">Calodo Cenrana</span>
     </h1>
     <p class="hero-desc">
-      Wujud rasa syukur masyarakat Bugis atas hasil panen padi dan kebun,<br />
+      Wujud rasa syukur masyarakat Bugis atas hasil panen padi, ikan, dan kebun,
       dirayakan setiap tahun dengan tradisi ayunan raksasa Mappere dan penumbukan gabah Mappadendang.
     </p>
     <div class="hero-pills">
-      <span class="pill">09.00 – 15.00 WITA</span>
+      <span class="pill"><time datetime="2026-11-15">Minggu, 15 November 2026</time></span>
       <span class="pill-div">·</span>
-      <span class="pill">Setiap Tahun</span>
+      <span class="pill">Mulai 09.00 WITA</span>
       <span class="pill-div">·</span>
       <span class="pill">Kabupaten Bone, Sulsel</span>
     </div>
@@ -61,79 +75,87 @@
 </header>
 
 <script>
-/* ---- Canvas Particle System ---- */
+/* ---- Ambient particles + parallax (skipped for reduced motion) ---- */
 (function () {
-  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d')!;
+  const hero   = document.getElementById('hero')!;
+  const heroBg = document.getElementById('heroBg')!;
+  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement | null;
+  if (!canvas || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const isSmall = matchMedia('(max-width: 768px)').matches;
+  const COUNT = isSmall ? 22 : 45;
   let W = 0, H = 0;
 
   function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+    W = canvas!.width  = hero.clientWidth;
+    H = canvas!.height = hero.clientHeight;
   }
-  resize();
-  window.addEventListener('resize', resize);
 
-  class Particle {
-    x = 0; y = 0; size = 0; speedY = 0; speedX = 0;
-    alpha = 0; fadeIn = 0; life = 0; maxLife = 0; color = '';
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * W;
-      this.y = H + Math.random() * 60;
-      this.size = 1 + Math.random() * 2;
-      this.speedY = 0.3 + Math.random() * 0.7;
-      this.speedX = (Math.random() - 0.5) * 0.4;
-      this.alpha = 0;
-      this.fadeIn = 0.008 + Math.random() * 0.008;
-      this.life = 0;
-      this.maxLife = 300 + Math.random() * 400;
-      const hue = 35 + Math.random() * 20;
-      const lit = 55 + Math.random() * 25;
-      this.color = `hsl(${hue},70%,${lit}%)`;
+  type P = { x: number; y: number; r: number; vy: number; vx: number; a: number; life: number; max: number; c: string };
+  function spawn(p: Partial<P> = {}, fresh = false): P {
+    const max = 300 + Math.random() * 400;
+    return Object.assign(p, {
+      x: Math.random() * W,
+      y: fresh ? Math.random() * H : H + Math.random() * 60,
+      r: 1 + Math.random() * 2,
+      vy: 0.3 + Math.random() * 0.7,
+      vx: (Math.random() - 0.5) * 0.4,
+      a: 0,
+      life: fresh ? Math.random() * max : 0,
+      max,
+      c: `hsl(${35 + Math.random() * 20},70%,${55 + Math.random() * 25}%)`,
+    }) as P;
+  }
+
+  let particles: P[] = [];
+  let running = false;
+  let raf = 0;
+
+  function frame() {
+    ctx!.clearRect(0, 0, W, H);
+    for (const p of particles) {
+      p.y -= p.vy; p.x += p.vx; p.life++;
+      if (p.life < 60) p.a = Math.min(p.a + 0.012, 0.65);
+      if (p.life > p.max - 80) p.a -= 0.012;
+      if (p.a <= 0 && p.life > 60 || p.y < -20) { spawn(p); continue; }
+      ctx!.fillStyle = p.c;
+      ctx!.globalAlpha = Math.max(0, p.a) * 0.25;   // soft glow
+      ctx!.beginPath(); ctx!.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2); ctx!.fill();
+      ctx!.globalAlpha = Math.max(0, p.a);
+      ctx!.beginPath(); ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx!.fill();
     }
-    update() {
-      this.y -= this.speedY;
-      this.x += this.speedX;
-      this.life++;
-      if (this.life < 60) this.alpha = Math.min(this.alpha + this.fadeIn, 0.65);
-      if (this.life > this.maxLife - 80) this.alpha -= 0.012;
-      if (this.alpha <= 0 || this.y < -20) this.reset();
-    }
-    draw() {
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, this.alpha);
-      ctx.fillStyle = this.color;
-      ctx.shadowBlur = 6;
-      ctx.shadowColor = this.color;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
+    raf = requestAnimationFrame(frame);
   }
+  function start() { if (!running && !document.hidden) { running = true; raf = requestAnimationFrame(frame); } }
+  function stop()  { running = false; cancelAnimationFrame(raf); }
 
-  const particles: Particle[] = [];
-  for (let i = 0; i < 55; i++) {
-    const p = new Particle();
-    p.y = Math.random() * H;
-    p.life = Math.random() * p.maxLife;
-    particles.push(p);
-  }
+  /* Start after first paint so particles never compete with the hero image */
+  const boot = () => {
+    resize();
+    particles = Array.from({ length: COUNT }, () => spawn({}, true));
+    let visible = true;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? start() : stop(); }).observe(hero);
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : visible && start()));
+    let rt = 0;
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = window.setTimeout(resize, 150); }, { passive: true });
+    start();
+  };
+  if ('requestIdleCallback' in window) requestIdleCallback(boot, { timeout: 1500 });
+  else setTimeout(boot, 300);
 
-  function animate() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  /* Parallax */
-  const heroBg = document.getElementById('heroBg')!;
+  /* Parallax (desktop pointers only) */
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y < window.innerHeight) heroBg.style.transform = `scale(1) translateY(${y * 0.25}px)`;
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) heroBg.style.transform = `translate3d(0, ${y * 0.25}px, 0)`;
+      ticking = false;
+    });
   }, { passive: true });
 })();
 </script>
@@ -150,10 +172,20 @@
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('/img/mappadendang.jpg') center/cover no-repeat;
+  background: var(--dark);
+  will-change: transform;
+}
+.hero-bg :global(picture),
+.hero-bg :global(img) {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hero-bg :global(img) {
+  object-fit: cover;
+  object-position: center;
   transform: scale(1.1);
   animation: bgZoom 18s ease-out forwards;
-  will-change: transform;
 }
 .hero-overlay {
   position: absolute;
@@ -178,7 +210,7 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 1.5rem;
   animation: fadeUp 1s ease 0.15s both;
 }
@@ -204,7 +236,7 @@
 .tl-thin {
   font-size: clamp(1.6rem,3.5vw,2.8rem);
   font-weight: 400;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.6);
   font-style: normal;
   letter-spacing: 0.04em;
 }
@@ -274,7 +306,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.6);
   writing-mode: vertical-lr;
 }
 .scroll-track {
@@ -313,7 +345,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.6);
   margin-bottom: 0.25rem;
 }
 .ib-val { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
@@ -333,5 +365,18 @@
 }
 @media (max-width: 768px) {
   .hero-infobar { display: none; }
+  .hero-content { padding-bottom: 7rem; }
+  .hero-scroll-ind { display: none; }
+}
+@media (max-width: 400px) {
+  .tl { font-size: clamp(2.6rem, 13vw, 3.5rem); }
+  .tl-thin { font-size: 1.4rem; }
+  .hero-pills { gap: 0.5rem; }
+  .pill-div { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg :global(img), .tl, .hero-eyebrow, .hero-desc, .hero-pills, .cta-btn,
+  .hero-scroll-ind, .hero-infobar, .scroll-thumb { animation: none !important; }
+  .hero-bg :global(img) { transform: none; }
 }
 </style>

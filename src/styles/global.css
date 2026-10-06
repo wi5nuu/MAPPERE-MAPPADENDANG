@@ -7,11 +7,11 @@
 :root {
   --gold:       #C9974A;
   --gold-lt:    #E2B96F;
-  --gold-dk:    #9A7035;
+  --gold-dk:    #8C6430;
   --ink:        #1C1712;
   --ink-2:      #2E2418;
   --ink-3:      #4A3D2C;
-  --muted:      #8A7B68;
+  --muted:      #6E6152;
   --cream:      #F9F7F4;
   --cream-2:    #F2EDE5;
   --dark:       #100E0B;
@@ -109,6 +109,9 @@ button { font-family: inherit; }
 .section:not(.bg-dark):not(.bg-charcoal) .section-h2 em {
   color: var(--gold-dk);
 }
+.section:not(.bg-dark):not(.bg-charcoal) .eyebrow {
+  color: var(--gold-dk);
+}
 .section:not(.bg-dark):not(.bg-charcoal) .section-sub {
   color: var(--muted);
 }
@@ -122,7 +125,7 @@ button { font-family: inherit; }
   color: var(--ink);
 }
 
-/* Dark Sections (Rundown, Mappere, Tapparareng) */
+/* Dark Sections (Rundown, Mappere, Tappareng) */
 .bg-dark     { background-color: var(--dark); color: #fff; }
 .bg-charcoal { background-color: var(--charcoal); color: #fff; }
 .bg-dark .section-h2, .bg-charcoal .section-h2 { color: #fff; }
@@ -172,7 +175,7 @@ button { font-family: inherit; }
   display: block;
   margin-inline: auto;
 }
-.section-sub.light { color: rgba(255,255,255,0.45); }
+.section-sub.light { color: rgba(255,255,255,0.6); }
 
 .body-lg {
   font-size: 1.08rem;
@@ -199,6 +202,11 @@ button { font-family: inherit; }
 .reveal.visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---- Responsive images ---- */
