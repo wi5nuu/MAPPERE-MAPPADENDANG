@@ -1,4 +1,6 @@
 ---
+import { Picture } from 'astro:assets';
+import mappadendangImg from '../assets/img/mappadendang.jpg';
 const details = [
   { key: 'Bentuk Lesung',     val: 'Kotak persegi panjang (bukan melengkung)' },
   { key: 'Pemukul Padi',      val: '4 perempuan wajib Baju Bodo Bugis' },
@@ -21,11 +23,13 @@ const details = [
       <!-- Sticky image -->
       <div class="mtx-media reveal">
         <div class="img-wrap">
-          <img
-            src="/img/mappadendang.jpg"
+          <Picture
+            src={mappadendangImg}
             alt="Mappadendang Calodo — lesung kayu berbentuk kotak persegi panjang berisi gabah, bunga, kain warna-warni; alu berhias biru dipukul berselang-seling oleh 4 perempuan berbaju bodo; 3 pria formasi segitiga di belakang; sawah padi latar belakang"
-            width="1200"
-            height="675"
+            widths={[480, 768, 1100]}
+            sizes="(max-width: 960px) 100vw, 560px"
+            formats={['webp']}
+            quality={72}
             loading="lazy"
             decoding="async"
           />
